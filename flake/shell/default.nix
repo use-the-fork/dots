@@ -6,6 +6,7 @@
 
     ./just/switch.nix
     ./just/installer.nix
+    ./just/git-cliff.nix
     ./just/flash.nix
     ./just/boot.nix
     ./just/iso.nix
