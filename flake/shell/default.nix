@@ -50,6 +50,7 @@
       ];
       packages = [
         pkgs.caligula
+        pkgs.git-cliff
         inputs.nixos-anywhere.packages.${system}.nixos-anywhere
       ];
     };
