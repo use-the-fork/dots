@@ -2,15 +2,39 @@
   description = "Robo Squad monorepo for everything NixOS";
 
   outputs = inputs:
-    inputs.robo-nix-lib.mkRoboFlake {
-      # You must provide our flake inputs to Robo Nix Lib.
-      inherit inputs;
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({withSystem, ...}: {
+      # systems for which the attributes of `perSystem` will be built
+      # and more if they can be supported...
+      #  - x86_64-linux: Desktops, laptops, servers
+      #  - aarch64-linux: ARM-based devices, PoC server and builders
+      systems = import inputs.systems;
 
-      # The `src` must be the root of the flake. See configuration
-      # in the next section for information on how you can move your
-      # Nix files to a separate directory.
-      src = ./.;
-    };
+      # import parts of the flake, which allows me to build the final flake
+      # from various parts constructed in a way that makes sense to me
+      # the most
+      imports = [
+        # this is used to be able to refrence the root src directory of the filesystem.
+        {_module.args.src = ./.;}
+
+        # parts and modules from inputs
+        inputs.flake-parts.flakeModules.easyOverlay
+        inputs.treefmt-nix.flakeModule
+
+        # parts of the flake
+        ./flake/lib # extended library on top of `nixpkgs.lib`
+        ./flake/pre-commit # pre-commit hooks, performed before each commit inside the devShell
+
+        ./flake/args # args that are passed to the flake.
+        ./flake/packages # packages that are loaded recursivly based on the packages directory.
+        ./flake/iso-images # local installation media
+        ./flake/shell # devShells exposed by the flake
+      ];
+
+      flake = {
+        # entry-point for NixOS configurations
+        nixosConfigurations = import ./hosts {inherit inputs withSystem;};
+      };
+    });
 
   inputs = {
     # global, so they can be `.follow`ed
@@ -28,17 +52,6 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    #Also by...
-    robo-nix-modules = {
-      url = "github:Robo-Cowboys/modules";
-      #      url = "path:/home/sincore/source/RoboNyx-template/robo-nyx";
-    };
-
-    robo-nix-lib = {
-      #      url = "github:Robo-Cowboys/lib";
-      url = "path:/home/sincore/source/robo-lib";
     };
 
     # Home Manager
@@ -179,7 +192,6 @@
     # mismatch if packages are builst against different versions
     # of the same depended packagaes
 
-    #git+https://github.com/hyprwm/Hyprland?ref=v0.41.1&submodules=1
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland?v0.41.1";
