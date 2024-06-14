@@ -104,11 +104,11 @@
       --config ${git-cliff-config.outPath}
     '';
   in {
-    just-flake.features.changelog = {
+    just-flake.features.cliff = {
       enable = true;
       justfile = ''
         # creates and updates the CHANGELOG.md using git-cliff.
-        changelog:
+        cliff:
           ${git-cliff-entry}/bin/git-cliff
       '';
     };
