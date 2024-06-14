@@ -103,12 +103,11 @@
       --config ${git-cliff-config.outPath}
     '';
   in {
-    just-flake.features.iso = {
+    just-flake.features.changelog = {
       enable = true;
       justfile = ''
-        # given a `target` build that systems iso and flash it to USB.
-        iso target:
-          set -euo pipefail
+        # creates and updates the CHANGELOG.md using git-cliff.
+        changelog:
           ${git-cliff-entry}/bin/git-cliff
       '';
     };
