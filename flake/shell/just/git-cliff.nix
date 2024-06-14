@@ -99,6 +99,7 @@
 
     git-cliff-entry = pkgs.writeShellScriptBin "git-cliff" ''
       ${pkgs.git-cliff}/bin/git-cliff \
+      --bump \
       --output CHANGELOG.md \
       --config ${git-cliff-config.outPath}
     '';
