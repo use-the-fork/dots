@@ -8,7 +8,7 @@
     #    ./hooks/typos.nix
 
     # disabled hooks
-    ./hooks/git-cliff.nix
+    #    ./hooks/git-cliff.nix
   ];
 
   perSystem = {pkgs, ...}: let
