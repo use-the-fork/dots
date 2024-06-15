@@ -1,7 +1,7 @@
 {
   inputs,
   lib,
-  src,
+  self,
   ...
 }: let
   inherit (inputs.nixpkgs) lib;
@@ -12,7 +12,7 @@
   builders = import' ./builders.nix {inherit inputs;}; # system builders
   services = import' ./services.nix; # systemd-service generators
   validators = import' ./validators.nix; # validate system conditions
-  helpers = import' ./helpers {inherit lib src;}; # helper functions
+  helpers = import' ./helpers {inherit lib self;}; # helper functions
   hardware = import' ./hardware.nix; # hardware capability checks
 
   # aliases for commonly used strings or functions

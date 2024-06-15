@@ -1,11 +1,11 @@
 {
   lib,
-  src,
+  self,
 }: let
   inherit (import ../common.nix {inherit lib;}) import';
 
   systemd = import' ./systemd.nix;
-  fs = import' ./fs.nix {inherit src;};
+  fs = import' ./fs.nix {inherit self;};
   types = import' ./types.nix;
   themes = import' ./themes.nix;
   modules = import' ./modules.nix;

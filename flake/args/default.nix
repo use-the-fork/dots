@@ -1,6 +1,6 @@
 {
   inputs,
-  src,
+  self,
   ...
 }: let
   # add `pins` to self so that the flake may refer it freely
@@ -14,13 +14,13 @@
   #  for setting them for users and such
   #
   # this is in your package not in shared.
-  pinnedSources = import "${src}/npins";
+  pinnedSources = import "${self}/npins";
 
   # add a collection of SSH keys to the keys so that
   #  1. my public keys are more easily obtainable from outside
   #  2. it's easy to share key names and values internally especially
   #  for setting them for users and such
-  publicKeys = import "${src}/keys";
+  publicKeys = import "${self}/keys";
 in {
   perSystem = {
     config,

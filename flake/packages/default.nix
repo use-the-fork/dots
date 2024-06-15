@@ -1,6 +1,6 @@
 {
   inputs,
-  src,
+  self,
   ...
 }: {
   perSystem = {
@@ -13,7 +13,7 @@
     in
       lib.filesystem.packagesFromDirectoryRecursive {
         inherit (scope) callPackage;
-        directory = "${src}/packages";
+        directory = "${self}/packages";
       };
   };
 }

@@ -1,4 +1,4 @@
-{src, ...}: {
+{self, ...}: {
   fs = rec {
     ## Matchers for file kinds. These are often used with `readDir`.
     ## Example Usage:
@@ -25,6 +25,6 @@
     ## "/user-source/systems"
     ## ```
     #@ Path -> Path
-    get-file = path: "${src}/${path}";
+    get-file = path: "${self}/${path}";
   };
 }
