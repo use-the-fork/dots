@@ -13,14 +13,12 @@
       # from various parts constructed in a way that makes sense to me
       # the most
       imports = [
-        # this is used to be able to refrence the root src directory of the filesystem.
-        {_module.args.src = ./.;}
-
         # parts and modules from inputs
         inputs.flake-parts.flakeModules.easyOverlay
         inputs.treefmt-nix.flakeModule
 
         # parts of the flake
+        #        ./flake/docs # genrates documentation for our system
         ./flake/lib # extended library on top of `nixpkgs.lib`
         ./flake/pre-commit # pre-commit hooks, performed before each commit inside the devShell
 
@@ -77,7 +75,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     ndg = {
-      url = "github:feel-co/ndg";
+      #      url = "github:use-the-fork/ndg";
+      url = "path:/home/sincore/source/ndg";
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
