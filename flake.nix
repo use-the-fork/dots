@@ -113,7 +113,7 @@
     just-flake.url = "github:juspay/just-flake";
 
     #    devenv.url = "path:/home/sincore/source/devenv";
-    devenv.url = "github:cachix/devenv";
+    devenv.url = "github:use-the-fork/devenv";
 
     # guess what this does
     # come on, try
