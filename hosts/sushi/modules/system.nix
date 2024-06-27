@@ -2,7 +2,7 @@
   modules.system = {
     mainUser = "sincore";
     fs = ["btrfs" "ext4" "vfat" "ntfs"];
-    autoLogin = false;
+    autoLogin = true;
 
     boot = {
       loader = "systemd-boot";
@@ -55,9 +55,11 @@
         userEmail = "sincore@gmail.com";
       };
 
+      chromium.enable = true;
       google-chrome.enable = true;
       signal-desktop.enable = true;
       gimp.enable = true;
+      realvnc-vnc-viewer.enable = true;
 
       default = {
         terminal = "kitty";
