@@ -4,6 +4,7 @@
     inputs.pre-commit-hooks-nix.flakeModule
     inputs.just-flake.flakeModule
 
+    ./just/bump.nix
     ./just/switch.nix
     ./just/installer.nix
     ./just/git-cliff.nix
