@@ -11,6 +11,10 @@ in {
     gimp.enable = mkEnableOption "Gimp Image Editor";
     libreoffice.enable = mkEnableOption "LibreOffice suite";
 
+    realvnc-vnc-viewer = {
+      enable = mkEnableOption "Realvnc VNC Viewer";
+    };
+
     element.enable = mkEnableOption "Element Matrix client";
     obs.enable = mkEnableOption "OBS Studio";
     spotify.enable = mkEnableOption "Spotify music player";
