@@ -55,7 +55,7 @@
         userEmail = "sincore@gmail.com";
       };
 
-      chromium.enable = true;
+      chromium.enable = false;
       google-chrome.enable = true;
       signal-desktop.enable = true;
       gimp.enable = true;
