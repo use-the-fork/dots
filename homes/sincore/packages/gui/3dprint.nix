@@ -2,7 +2,6 @@
   osConfig,
   pkgs,
   lib,
-  self',
   ...
 }: let
   inherit (lib) mkIf;
@@ -13,7 +12,7 @@
 in {
   config = mkIf (prg.gui.enable && sys.printing."3d".enable) {
     home.packages = with pkgs; [
-      self'.packages.orca-slicer
+      orca-slicer
       prusa-slicer
       openscad-unstable
     ];
