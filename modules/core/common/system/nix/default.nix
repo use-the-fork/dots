@@ -63,7 +63,7 @@ in {
     # set up garbage collection to run weekly,
     # removing unused packages that are older than 30 days
     gc = {
-      automatic = false;
+      automatic = true;
       dates = "Sat *-*-* 03:00";
       options = "--delete-older-than 30d";
     };
@@ -138,7 +138,7 @@ in {
       warn-dirty = false;
 
       # maximum number of parallel TCP connections used to fetch imports and binary caches, 0 means no limit
-      http-connections = 50;
+      http-connections = 0;
 
       # whether to accept nix configuration from a flake without prompting
       accept-flake-config = false;
