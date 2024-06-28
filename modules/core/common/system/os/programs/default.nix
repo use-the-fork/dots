@@ -7,7 +7,6 @@
   imports = [
     ./direnv.nix
     ./nano.nix
-    ./nh.nix
   ];
   config = {
     programs = {
