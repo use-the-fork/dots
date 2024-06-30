@@ -2,17 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
-## \[0.2.0\] - 2024-06-15
+## \[0.2.0\] - 2024-06-30
+
+### Bug Fixes
+
+- _(flake.nix)_ Update hyprland git URL
+- _(gui)_ Correct package reference in 3dprint.nix
 
 ### Features
 
+- _(just)_ Add bump command to justfile
+- _(laptop-system)_ Add power management configurations and service files
+- _(nix)_ Enable automatic garbage collection and remove limit on http connections
+- _(secrets)_ Add new encrypted secrets file for OpenAI development environment
+- _(services)_ Enable mako service based on device type and notification environment
+- _(services)_ Add swaync to default services list
+- _(swaync)_ Update notification config, add notification daemon to desktop env, move swaync to shared services
+- _(system)_ Enable autoLogin and add chromium and realvnc-vnc-viewer modules
+- _(system.nix)_ Disable Chromium in system modules
+- _(system/programs)_ Add Realvnc VNC Viewer to the list of enabled programs
+- _(terminal/tools)_ Add xdg configuration file
+- _(user environment)_ Add swaynotificationcenter to modules in usrEnv.nix
 - _(No Category)_ Add git-cliff to list of packages in default.nix
+
+### Miscellaneous Tasks
+
+- _(flake.nix)_ Update devenv url from cachix to use-the-fork
+- _(gui)_ Remove swaync style.css file
+- _(gui)_ Remove swaync style.css file
 
 ### Refactor
 
+- _(chromium)_ Simplify setup and change extensions
 - _(code)_ Remove `nix flake update robo-nix-lib` in multiple files and rename `changelog` to `cliff` in `git-cliff.nix`
+- _(core)_ Remove unused environment variables from Wayland config
+- _(core)_ Simplify QML package inheritance in theme module
+- _(dunst)_ Add environment notification check and alter origin position
+- _(gpu)_ Change hardware settings from opengl to graphics for amd support
+- _(signal-desktop.nix)_ Replace mkHyprlandService with mkGraphicalService
+- _(style)_ Split Monolithic Waybar styling into separate module files
+- _(system)_ Move nh.nix, update programs, add overlays for nix-output-monitor in workstation
 - _(No Category)_ Replace 'src' references with 'self' in several nix files
 - _(No Category)_ Update flake.nix and flake.lock with changes to dependencies and code structure
+
+### Styling
+
+- _(waybar)_ Update font color and module formats in catppuccin-mocha preset
+
+### Flake
+
+- _(No Category)_ Bump inputs
+- _(No Category)_ Bump inputs
 
 ## \[0.1.0\] - 2024-06-14
 

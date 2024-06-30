@@ -3,30 +3,43 @@
   pkgs,
   ...
 }: let
-  inherit (lib) getExe';
-  #  githubHelper = pkgs.writeShellScriptBin "githubHelper" /* bash */ ''
-  #    #!/usr/bin/env bash
-  #
-  #    NOTIFICATIONS="$(${getExe pkgs.gh} api notifications)"
-  #    COUNT="$(echo "$NOTIFICATIONS" | ${getExe pkgs.jq} 'length')"
-  #
-  #    echo '{"text":'"$COUNT"',"tooltip":"'"$COUNT"' Notifications","class":""}'
-  #  '';
+  inherit (lib) getExe getExe';
+  githubHelper =
+    pkgs.writeShellScriptBin "githubHelper"
+    /*
+    bash
+    */
+    ''
+      #!/usr/bin/env bash
+
+      NOTIFICATIONS="$(${getExe pkgs.gh} api notifications)"
+      COUNT="$(echo "$NOTIFICATIONS" | ${getExe pkgs.jq} 'length')"
+
+      echo '{"text":'"$COUNT"',"tooltip":"'"$COUNT"' Notifications","class":""}'
+    '';
 in {
   "custom/ellipses" = {
     "format" = "";
     "tooltip" = false;
   };
 
-  "custom/colorpicker" = {
-    "format" = "󰈊 ";
-    "tooltip" = false;
-    "on-click" = "${getExe' pkgs.hyprpicker "hyprpicker"} -a -r";
+  "custom/github" = {
+    format = "  {}";
+    return-type = "json";
+    interval = 60;
+    exec = "${getExe githubHelper}";
+    on-click = "${getExe' pkgs.coreutils "sleep"} 0.1 && ${getExe' pkgs.xdg-utils "xdg-open"} https://github.com/notifications";
+  };
+
+  "custom/lock" = {
+    format = "󰍁 ";
+    tooltip = false;
+    on-click = "${getExe pkgs.swaylock-effects} -fF";
   };
 
   "custom/notification" = {
     "tooltip" = true;
-    "format" = "{} {icon}";
+    "format" = "{icon}  {}";
     "format-icons" = {
       "notification" = "<span foreground='red'><sup></sup></span>";
       "none" = "";
@@ -47,6 +60,11 @@ in {
 
   "custom/separator-right" = {
     "format" = "";
+    "tooltip" = false;
+  };
+
+  "custom/separator-stats" = {
+    "format" = "";
     "tooltip" = false;
   };
 

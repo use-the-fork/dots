@@ -1,49 +1,75 @@
 {
-  "group/battery" = {
-    "orientation" = "horizontal";
-    "modules" = [
-      "battery"
+  "group/audio" = {
+    orientation = "horizontal";
+    drawer = {
+      transition-duration = 500;
+      transition-left-to-right = false;
+    };
+    modules = [
+      "pulseaudio"
+      "pulseaudio/slider"
     ];
   };
 
-  "group/utilities" = {
-    "orientation" = "horizontal";
-    "modules" = [
-      "custom/colorpicker"
+  "group/power" = {
+    orientation = "horizontal";
+    drawer = {
+      transition-duration = 500;
+      children-class = "not-power";
+      transition-left-to-right = false;
+    };
+    modules = [
+      "custom/wlogout"
+      # "custom/power"
+      # "custom/quit"
+      # "custom/lock"
+      # "custom/reboot"
     ];
   };
 
-  "group/notifications" = {
-    "orientation" = "horizontal";
-    "modules" = [
+  "group/control-center" = {
+    orientation = "horizontal";
+    modules = [
+      "idle_inhibitor"
+      "systemd-failed-units"
+      "custom/notification"
+      "custom/github"
+      "upower"
       "backlight"
       "pulseaudio"
-      "group/battery"
-      "custom/notification"
     ];
   };
 
-  "group/stats" = {
-    "orientation" = "horizontal";
-    "modules" = [
-      "network"
-      "cpu"
-      "memory"
-      "disk"
-    ];
+  "group/tray" = {
+    orientation = "horizontal";
+    modules = ["tray"];
   };
 
   "group/stats-drawer" = {
-    "orientation" = "horizontal";
-    #    "drawer" = {
-    #      "transition-duration" = 100;
-    #      "transition-left-to-right" = false;
-    #    };
-    "modules" = [
+    orientation = "horizontal";
+    drawer = {
+      transition-duration = 500;
+      transition-left-to-right = false;
+    };
+    modules = [
+      "custom/separator-stats"
       "network"
       "cpu"
       "memory"
       "disk"
+      "temperature"
+    ];
+  };
+
+  "group/tray-drawer" = {
+    orientation = "horizontal";
+    drawer = {
+      transition-duration = 500;
+      transition-left-to-right = false;
+    };
+    modules = [
+      "custom/separator-right"
+      "tray"
     ];
   };
 }

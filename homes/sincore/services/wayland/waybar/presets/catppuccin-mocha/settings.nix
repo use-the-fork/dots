@@ -37,11 +37,12 @@
     modules-center = [
     ];
     modules-right = [
-      "group/stats"
-      "group/notifications"
-      "tray"
-      "hyprland/submap"
+      "group/tray-drawer"
+      "group/stats-drawer"
+      "group/control-center"
+      #      "custom/weather"
       "clock"
+      "custom/lock"
     ];
   };
 in {

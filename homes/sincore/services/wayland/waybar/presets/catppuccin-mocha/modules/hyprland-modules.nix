@@ -1,7 +1,13 @@
 _: {
+  "hyprland/submap" = {
+    format = "✌️ {}";
+    max-length = 8;
+    tooltip = false;
+  };
+
   "hyprland/window" = {
-    "format" = "{}";
-    "separate-outputs" = true;
+    format = "{}";
+    separate-outputs = true;
   };
 
   "hyprland/workspaces" = {

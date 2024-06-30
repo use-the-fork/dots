@@ -4,60 +4,70 @@
   ...
 }: let
   inherit (lib) getExe getExe';
-  #  brightnessctl = pkgs.writeShellScriptBin "toggle-brightness" ''
-  #                    #!/bin/sh
-  #                    # Get the current brightness and maximum brightness
-  #                    current=$(brightnessctl g)
-  #                    max=$(brightnessctl m)
-  #
-  #                    # Check the current brightness level
-  #                    if [ "$current" -eq "$max" ]; then
-  #                      # If brightness is max, set it to 0
-  #                      brightnessctl s 0%
-  #                    elif [ "$current" -eq 0 ]; then
-  #                      # If brightness is 0, set it to 100
-  #                      brightnessctl s 100%
-  #                    else
-  #                      # If brightness is neither 0 nor max, set it to 0
-  #                      brightnessctl s 0%
-  #                    fi
-  #                  '';
 in {
-  "clock" = {
-    "tooltip-format" = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-    "format" = "{:%I:%M %p }";
-    "format-alt" = "{:%Y-%m-%d}";
+  backlight = let
+    brightnessctl = lib.getExe pkgs.brightnessctl;
+  in {
+    format = "{icon}  {percent}%";
+    format-icons = [
+      "󰋙"
+      "󰫃"
+      "󰫄"
+      "󰫅"
+      "󰫆"
+      "󰫇"
+      "󰫈"
+    ];
+    on-scroll-up = "${brightnessctl} s +1%";
+    on-scroll-down = "${brightnessctl} s 1%-";
   };
 
-  "cpu" = {
-    "format" = "  {usage}%";
-    "tooltip" = true;
+  upower = {
+    icon-size = 12;
+    hide-if-empty = true;
+    tooltip = true;
+    tooltip-spacing = 5;
   };
 
-  "disk" = {
-    "format" = "  {percentage_used}%";
+  clock = {
+    tooltip-format = "<big>{:%a %d %b}</big>\n<tt><small>{calendar}</small></tt>";
+    format = "{:%I:%M %p }";
   };
 
-  "idle_inhibitor" = {
-    "format" = "{icon} ";
-    "format-icons" = {
-      "activated" = "";
-      "deactivated" = "";
+  disk = {
+    format = "  {percentage_used}%";
+  };
+
+  cpu = {
+    format = "  {usage}%";
+    tooltip = true;
+    states = {
+      "50" = 50;
+      "60" = 75;
+      "70" = 90;
     };
   };
 
-  "keyboard-state" = {
-    "numlock" = true;
-    "capslock" = true;
-    "format" = "{icon} {name}";
-    "format-icons" = {
-      "locked" = "";
-      "unlocked" = "";
+  idle_inhibitor = {
+    format = "{icon} ";
+    format-icons = {
+      activated = "";
+      deactivated = "";
     };
   };
 
-  "memory" = {
-    "format" = "󰍛  {}%";
+  keyboard-state = {
+    numlock = true;
+    capslock = true;
+    format = "{icon} {name}";
+    format-icons = {
+      locked = "";
+      unlocked = "";
+    };
+  };
+
+  memory = {
+    format = "󰍛  {}%";
   };
 
   "mpris" = {
@@ -79,87 +89,71 @@ in {
     };
   };
 
-  "network" = {
-    "interval" = 1;
-    "format-wifi" = "  󰜮 {bandwidthDownBytes} 󰜷 {bandwidthUpBytes}";
-    "format-ethernet" = "󰈀  󰜮 {bandwidthDownBytes} 󰜷 {bandwidthUpBytes}";
-    "tooltip-format" = " {ifname} via {gwaddr}";
-    "format-linked" = "󰈁 {ifname} (No IP)";
-    "format-disconnected" = " Disconnected";
-    "format-alt" = "{ifname}: {ipaddr}/{cidr}";
+  network = let
+    nm-editor = "${getExe' pkgs.networkmanagerapplet "nm-connection-editor"}";
+  in {
+    interval = 1;
+    format-wifi = "󰜷 {bandwidthUpBytes} 󰜮 {bandwidthDownBytes}";
+    format-ethernet = "󰜷 {bandwidthUpBytes} 󰜮 {bandwidthDownBytes}";
+    tooltip-format = "󰈀 {ifname} via {gwaddr}";
+    format-linked = "󰈁 {ifname} (No IP)";
+    format-disconnected = " Disconnected";
+    format-alt = "{ifname}: {ipaddr}/{cidr}";
+    on-click-right = "${nm-editor}";
   };
 
-  "backlight" = {
-    format = "{icon} ";
-    format-icons = ["󰛩" "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨"];
-    tooltip-format = "{percent}%";
-    "scroll-step" = 5;
+  systemd-failed-units = {
+    hide-on-ok = false;
+    format = "✗ {nr_failed}";
+    format-ok = "✓";
+    system = true;
+    user = false;
   };
 
-  "battery" = {
-    format = "{icon} ";
-    states = {
-      warning = 30;
-      critical = 15;
-    };
-    format-charging = "󰂄";
-    format-plugged = "󰂄";
-    format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
-    tooltip-format = "{percent}%";
+  temperature = {
+    hwmon-path-abs = "/sys/class/hwmon/hwmon2";
+    input-filename = "temp1_input";
+    critical-threshold = 80;
+    format-critical = "{temperatureC}°C {icon}";
+    format = "{icon} {temperatureC}°C";
+    format-icons = [
+      ""
+      ""
+      ""
+    ];
+    interval = "5";
   };
 
-  "pulseaudio" = {
-    "format" = "{icon} ";
-    "format-bluetooth" = "{icon} ";
-    "format-muted" = "󰖁";
-    "format-icons" = {
-      "headphone" = "";
-      "hands-free" = "";
-      "headset" = "";
-      "phone" = "";
-      "portable" = "";
-      "car" = "";
-      "default" = [
+  tray = {
+    spacing = 10;
+  };
+
+  user = {
+    format = "{user}";
+    interval = 60;
+    height = 30;
+    width = 30;
+    icon = true;
+  };
+
+  pulseaudio = {
+    format = "{icon}  {volume}%";
+    format-bluetooth = "{icon}  {volume}%";
+    format-muted = "";
+    format-icons = {
+      headphone = "";
+      hands-free = "";
+      headset = "";
+      phone = "";
+      portable = "";
+      car = "";
+      default = [
         ""
         ""
       ];
     };
-    "scroll-step" = 1;
-    "tooltip-format" = "{percent}%";
-    "on-click" = "pavucontrol";
-    "ignored-sinks" = [
-      "Easy Effects Sink"
-    ];
-  };
-
-  "systemd-failed-units" = {
-    "hide-on-ok" = false;
-    "format" = "✗ {nr_failed}";
-    "format-ok" = "✓";
-    "system" = true;
-    "user" = false;
-  };
-
-  "tray" = {
-    "spacing" = 10;
-  };
-
-  "user" = {
-    "format" = "{user}";
-    "interval" = 60;
-    "height" = 30;
-    "width" = 30;
-    "icon" = true;
-  };
-
-  "wireplumber" = {
-    "format" = "{volume}% {icon}";
-    "format-muted" = "󰖁";
-    "on-click" = "${getExe' pkgs.coreutils "sleep"} 0.1 && ${getExe pkgs.helvum}";
-    "format-icons" = [
-      ""
-      ""
-      ""
-    ];
+    scroll-step = 1;
+    on-click = "pavucontrol";
+    ignored-sinks = ["Easy Effects Sink"];
   };
 }
