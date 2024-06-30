@@ -5,6 +5,7 @@
     #    ./nextcloud.nix
     #    ./polkit.nix
     #    ./transience.nix
+    ./swaync
     ./dunst
     ./mako
     ./tray.nix
