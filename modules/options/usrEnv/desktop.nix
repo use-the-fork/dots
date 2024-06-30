@@ -20,6 +20,14 @@ in {
       '';
     };
 
+    notification = mkOption {
+      type = enum ["none" "dunst" "mako" "swaynotificationcenter"];
+      default = "none";
+      description = ''
+        The notification deamon to be used.
+      '';
+    };
+
     desktops = {
       hyprland = {
         enable = mkOption {
