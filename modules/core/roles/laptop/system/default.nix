@@ -5,6 +5,7 @@
 }:
 with lib; {
   imports = [
+    ./power
     ./touchpad.nix
   ];
 
@@ -20,8 +21,6 @@ with lib; {
           HibernateDelaySec=3600
         '';
       };
-
-      upower.enable = true;
     };
   };
 }
