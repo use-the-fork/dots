@@ -39,7 +39,6 @@
     modules-right = [
       "group/stats"
       "group/notifications"
-      "group/utilities"
       "tray"
       "hyprland/submap"
       "clock"

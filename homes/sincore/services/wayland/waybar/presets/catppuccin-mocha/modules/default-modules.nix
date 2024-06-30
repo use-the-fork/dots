@@ -90,14 +90,14 @@ in {
   };
 
   "backlight" = {
-    format = "{icon} {percent}%";
+    format = "{icon} ";
     format-icons = ["󰛩" "󱩎" "󱩏" "󱩐" "󱩑" "󱩒" "󱩓" "󱩔" "󱩕" "󱩖" "󰛨"];
     tooltip-format = "{percent}%";
     "scroll-step" = 5;
   };
 
   "battery" = {
-    format = "{icon} {capacity}% ";
+    format = "{icon} ";
     states = {
       warning = 30;
       critical = 15;
@@ -105,12 +105,13 @@ in {
     format-charging = "󰂄";
     format-plugged = "󰂄";
     format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+    tooltip-format = "{percent}%";
   };
 
   "pulseaudio" = {
-    "format" = "{icon} {volume}%";
-    "format-bluetooth" = "{icon} {volume}%";
-    "format-muted" = "";
+    "format" = "{icon} ";
+    "format-bluetooth" = "{icon} ";
+    "format-muted" = "󰖁";
     "format-icons" = {
       "headphone" = "";
       "hands-free" = "";
@@ -124,6 +125,7 @@ in {
       ];
     };
     "scroll-step" = 1;
+    "tooltip-format" = "{percent}%";
     "on-click" = "pavucontrol";
     "ignored-sinks" = [
       "Easy Effects Sink"

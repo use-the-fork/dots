@@ -7,6 +7,7 @@ with colors; ''
      * {
          font-family: Ubuntu Nerd Font;
          font-size: 12px;
+         color: #${colors.base05};
      }
 
      window#waybar {
@@ -62,8 +63,8 @@ with colors; ''
    #clock {
        font-size: 12px;
        font-weight: 900;
+       color: #${colors.base05};
      }
-
 
    @keyframes blink {
            to {
@@ -164,6 +165,11 @@ with colors; ''
      #pulseaudio.muted {
        background-color: #90b1b1;
        color: #2a5c45;
+     }
+
+     #custom-colorpicker
+      {
+       color: #${colors.base05};
      }
 
      /***********************************************
