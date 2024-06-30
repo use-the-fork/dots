@@ -9,6 +9,7 @@
     ./nix-direnv.nix
     ./man.nix
     ./transient-services.nix
+    ./xdg.nix
     ./zoxide.nix
   ];
 }
