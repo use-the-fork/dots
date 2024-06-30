@@ -9,10 +9,11 @@
   inherit (modules.style.colorScheme) colors;
   inherit (modules.style) fonts;
 
+  env = modules.usrEnv;
   dev = modules.device;
   acceptedTypes = ["desktop" "laptop" "lite" "hybrid"];
 in {
-  config = mkIf (builtins.elem dev.type acceptedTypes) {
+  config = mkIf (builtins.elem dev.type acceptedTypes && env.notification == "dunst") {
     services.dunst = {
       enable = true;
       iconTheme = {
@@ -25,7 +26,7 @@ in {
           follow = "mouse";
           width = 400;
           height = 280;
-          origin = "top-center";
+          origin = "top-right";
           alignment = "left";
           vertical_alignment = "center";
           ellipsize = "middle";
