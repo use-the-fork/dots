@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf getExe isWayland mkHyprlandService;
+  inherit (lib) mkIf getExe isWayland mkGraphicalService;
   inherit (osConfig) modules;
   sys = modules.system;
   prg = sys.programs;
@@ -20,7 +20,7 @@ in {
     ];
 
     systemd.user.services = {
-      signaldesktop = mkHyprlandService {
+      signaldesktop = mkGraphicalService {
         Unit.Description = "Signal Messenger";
         Service = {
           ExecStart = "${getExe pkgs.signal-desktop} ${waylandFlags}";
