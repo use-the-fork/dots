@@ -8,13 +8,14 @@
   inherit (osConfig) modules;
   inherit (osConfig.modules.style.colorScheme) colors;
 
+  env = modules.usrEnv;
   dev = modules.device;
   acceptedTypes = ["desktop" "laptop" "lite" "hybrid"];
 in {
-  config = mkIf (builtins.elem dev.type acceptedTypes) {
+  config = mkIf (builtins.elem dev.type acceptedTypes && env.notification == "mako") {
     services = {
       mako = {
-        enable = false;
+        enable = true;
         #        icons = true;
         #        actions = true;
 
