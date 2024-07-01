@@ -8,10 +8,18 @@
     services = {
       printing = {
         enable = true;
+
+        #enable interface for print mangment.
+        webInterface = true;
         drivers = with pkgs; [
           gutenprint
+          gutenprintBin
           hplip
+          epson-escpr
+          epson-escpr2
         ];
+
+        browsing = true;
       };
 
       # required for network discovery of printers
