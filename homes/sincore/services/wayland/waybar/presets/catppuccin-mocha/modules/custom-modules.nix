@@ -6,9 +6,6 @@
   inherit (lib) getExe getExe';
   githubHelper =
     pkgs.writeShellScriptBin "githubHelper"
-    /*
-    bash
-    */
     ''
       #!/usr/bin/env bash
 
@@ -24,7 +21,7 @@ in {
   };
 
   "custom/github" = {
-    format = "  {}";
+    format = "   {}";
     return-type = "json";
     interval = 60;
     exec = "${getExe githubHelper}";

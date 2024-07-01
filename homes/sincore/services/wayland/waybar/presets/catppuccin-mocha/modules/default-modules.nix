@@ -35,11 +35,11 @@ in {
   };
 
   disk = {
-    format = "  {percentage_used}%";
+    format = "   {percentage_used}%";
   };
 
   cpu = {
-    format = "  {usage}%";
+    format = "   {usage}%";
     tooltip = true;
     states = {
       "50" = 50;
@@ -137,7 +137,7 @@ in {
   };
 
   pulseaudio = {
-    format = "{icon}  {volume}%";
+    format = "{icon}   {volume}%";
     format-bluetooth = "{icon}  {volume}%";
     format-muted = "";
     format-icons = {

@@ -76,7 +76,7 @@ with colors; ''
    }
 
    #clock {
-     font-size: 12px;
+     padding-right: 0.5em;
    }
 
    #custom-separator-right,
