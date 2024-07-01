@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf isWayland getExe mkGraphicalService;
+  inherit (lib) mkIf isWayland getExe' mkGraphicalService;
   inherit (osConfig) modules;
   inherit (modules.style.colorScheme) colors;
   sys = modules.system;
@@ -27,7 +27,7 @@ in {
       swaynotificationcenter = mkGraphicalService {
         Unit.Description = "Sway Notification Center";
         Service = {
-          ExecStart = "${getExe pkgs.swaynotificationcenter}";
+          ExecStart = "${getExe' pkgs.swaynotificationcenter "swaync"}";
           Restart = "always";
         };
       };
