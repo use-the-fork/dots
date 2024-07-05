@@ -21,13 +21,17 @@
         enable = true;
         autoConnect = true;
       };
+      blocky.enable = true;
     };
-
     virtualization = {
       enable = true;
       docker.enable = true;
       qemu.enable = false;
       podman.enable = false;
+    };
+
+    services = {
+      monitoring.prometheus.enable = false;
     };
 
     programs = {
