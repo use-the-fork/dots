@@ -104,7 +104,7 @@ in {
   # Self-made live recovery environment that overrides or/and configures certain default programs
   # provides tools and fixes the keymaps for my keyboard
   installer = mkNixosIso {
-    hostname = "installer";
+    hostname = "nixos-installer";
     system = "x86_64-linux";
     modules = [
       ./installer
