@@ -10,6 +10,12 @@
 in {
   config = mkIf cfg.monitoring.prometheus.enable {
     services = {
+      #Enable caddy for prometheus
+      caddy.virtualHosts."dash.my.lan".extraConfig = ''
+        tls internal
+        reverse_proxy 127.0.0.1:9100
+      '';
+
       # Prometheus exporter for Grafana
       prometheus = {
         enable = true;
