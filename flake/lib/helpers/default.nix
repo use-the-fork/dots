@@ -14,5 +14,5 @@ in {
   inherit (fs) fs;
   inherit (types) filterNixFiles importNixFiles boolToNum fetchKeys containsStrings indexOf intListToStringList;
   inherit (themes) serializeTheme compileSCSS;
-  inherit (modules) mkModule;
+  inherit (modules) mkService;
 }
