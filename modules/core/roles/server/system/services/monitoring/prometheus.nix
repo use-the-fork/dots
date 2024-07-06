@@ -7,19 +7,20 @@
 
   sys = config.modules.system;
   cfg = sys.services;
+  prome = cfg.monitoring.prometheus;
 in {
-  config = mkIf cfg.monitoring.prometheus.enable {
+  config = mkIf prome.enable {
     services = {
       #Enable caddy for prometheus
-      caddy.virtualHosts."dash.my.lan".extraConfig = ''
+      caddy.virtualHosts."${prome.subDomain}".extraConfig = ''
         tls internal
-        reverse_proxy 127.0.0.1:9100
+        reverse_proxy ${prome.settings.host}:${prome.settings.port}
       '';
 
       # Prometheus exporter for Grafana
       prometheus = {
         enable = true;
-        port = 9100;
+        port = prome.settings.port;
 
         # relatively frequent scraping intervals
         globalConfig = {
