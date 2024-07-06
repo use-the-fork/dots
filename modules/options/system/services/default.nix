@@ -25,6 +25,11 @@ in {
         type = "webserver";
       };
 
+      blocky = mkService {
+        name = "Blocky";
+        type = "webserver";
+      };
+
       #
       #      elasticsearch = mkService {
       #        name = "Elasticsearch";
