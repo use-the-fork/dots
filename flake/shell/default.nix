@@ -12,6 +12,7 @@
     ./just/boot.nix
     ./just/iso.nix
     ./just/build.nix
+    ./just/switch-remote.nix
     ./just/test.nix
     ./just/tree-fmt.nix #tree fmt command
   ];
