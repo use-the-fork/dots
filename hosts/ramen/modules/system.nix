@@ -21,8 +21,8 @@
         enable = true;
         autoConnect = true;
       };
-      blocky.enable = true;
     };
+
     virtualization = {
       enable = true;
       docker.enable = true;
@@ -31,13 +31,17 @@
     };
 
     services = {
-      nginx.enable = false;
+      blocky.enable = true;
+
       caddy.enable = true;
 
       monitoring = {
-        prometheus.enable = true;
+        prometheus = {
+          enable = true;
+        };
         grafana.enable = true;
       };
+
       database = {
         mysql.enable = true;
         postgresql.enable = true;
