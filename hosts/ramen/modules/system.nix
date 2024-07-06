@@ -31,7 +31,17 @@
     };
 
     services = {
-      monitoring.prometheus.enable = false;
+      nginx.enable = false;
+      caddy.enable = true;
+
+      monitoring = {
+        prometheus.enable = true;
+        grafana.enable = true;
+      };
+      database = {
+        mysql.enable = true;
+        postgresql.enable = true;
+      };
     };
 
     programs = {

@@ -19,6 +19,20 @@ in {
           upstream = "1.1.1.1";
           ips = ["1.1.1.1" "8.8.8.8"];
         };
+        # My custom entries for local network
+        customDNS = {
+          customTTL = "1h";
+          mapping = {
+            "dash.my.lan" = "100.68.105.44";
+            "grafana.my.lan" = "100.68.105.44";
+          };
+        };
+        # Redirect all .lan queries to the router
+        #        conditional = {
+        #          mapping = {
+        #            lan = "10.69.1.1";
+        #          };
+        #        };
         #Enable Blocking of certian domains.
         blocking = {
           blackLists = {
@@ -34,6 +48,7 @@ in {
             kids-ipad = ["ads" "adult"];
           };
         };
+        prometheus.enable = true;
         caching = {
           minTime = "5m";
           maxTime = "30m";
