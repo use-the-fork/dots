@@ -32,6 +32,9 @@
     withSystem,
     system,
     hostname,
+    domain,
+    ipPrivate,
+    ipTailscale,
     ...
   } @ args:
     withSystem system ({
@@ -50,6 +53,9 @@
         modules = concatLists [
           (singleton {
             networking.hostName = args.hostname;
+            networking.domainName = args.domain;
+            networking.ip.private = args.ipPrivate;
+            networking.ip.tailscale = args.ipTailscale;
             nixpkgs = {
               hostPlatform = mkDefault args.system;
               flake.source = nixpkgs.outPath;

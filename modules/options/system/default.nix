@@ -1,5 +1,4 @@
 {
-  self,
   config,
   lib,
   ...
@@ -15,7 +14,6 @@ in {
     ./impermanence.nix
 
     # network and overall hardening
-    #    ./networking
     ./security.nix
     ./encryption.nix
 

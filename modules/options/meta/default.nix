@@ -22,6 +22,46 @@ in {
       '';
     };
 
+    domainName = mkOption {
+      type = types.str;
+      default = config.networking.domainName;
+      readOnly = true;
+      description = ''
+        The primary domain used for local network operations.
+
+        Setting this option defines the network domain name under
+        which all local services and machines will be addressed.
+      '';
+    };
+
+    subDomainName = mkOption {
+      type = types.str;
+      default = "${config.networking.domainName}.${config.networking.hostName}";
+      readOnly = true;
+      description = ''
+        The primary sub domain used for local network operations.
+      '';
+    };
+
+    ip = {
+      private = mkOption {
+        type = types.str;
+        default = config.networking.ip.private;
+        readOnly = true;
+        description = ''
+          The private ip of this machine.
+        '';
+      };
+      tailscale = mkOption {
+        type = types.str;
+        default = config.networking.ip.tailscale;
+        readOnly = true;
+        description = ''
+          The tailscale ip of this machine.
+        '';
+      };
+    };
+
     system = mkOption {
       type = types.str;
       default = config.system.build.toplevel.system;
