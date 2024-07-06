@@ -19,6 +19,7 @@ in {
         services.tailscale = {
           enable = true;
           extraUpFlags = optional cfg.manageSSH "--ssh";
+          permitCertUid = "caddy";
         };
         networking.firewall = {
           trustedInterfaces = ["${tailscale.interfaceName}"];
