@@ -15,6 +15,9 @@
   disko = inputs.disko.nixosModules.disko; # disko for disk setup and easier volume mangment.
   hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
 
+  #TODO: This should be an option I think.
+  domain = "my.lan";
+
   # serializing the modulePath to a variable
   # this is in case the modulePath changes depth (i.e modules becomes nixos/modules)
   modulePath = ../modules;
@@ -53,6 +56,9 @@ in {
   sushi = mkNixosSystem {
     inherit withSystem;
     hostname = "sushi";
+    inherit domain;
+    ipPrivate = "192.168.100.214";
+    ipTailscale = "100.99.44.124";
     system = "x86_64-linux";
     modules =
       [
@@ -70,6 +76,9 @@ in {
   ramen = mkNixosSystem {
     inherit withSystem;
     hostname = "ramen";
+    inherit domain;
+    ipPrivate = "192.168.100.2";
+    ipTailscale = "100.68.105.44";
     system = "x86_64-linux";
     modules =
       [
@@ -87,6 +96,9 @@ in {
   raspberry = mkNixosSystem {
     inherit withSystem;
     hostname = "raspberry";
+    inherit domain;
+    ipPrivate = "";
+    ipTailscale = "";
     system = "aarch64-linux";
     modules =
       [
