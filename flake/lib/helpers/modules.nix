@@ -12,11 +12,18 @@
     type ? "", # type being an empty string means it can be skipped, omitted
     host ? "127.0.0.1", # default to listening only on localhost
     port ? 0, # default port should be a stub
+    subDomain ? "", # domain being an empty string means it can be skipped, omitted. This is also used to create our vHosts Etc
     extraOptions ? {}, # used to define additional modules
   }: {
     enable = mkEnableOption "${name} ${type} service";
     settings =
       {
+        subDomain = mkOption {
+          type = str;
+          default = subDomain;
+          description = "The sub-domain ${subDomain} will be";
+        };
+
         host = mkOption {
           type = str;
           default = host;
