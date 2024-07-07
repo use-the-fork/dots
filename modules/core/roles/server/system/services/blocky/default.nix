@@ -54,6 +54,10 @@ in {
           maxTime = "30m";
           prefetching = true;
         };
+        ports = {
+          dns = 53;
+          http = "127.0.0.1:4000";
+        };
       };
     };
   };
