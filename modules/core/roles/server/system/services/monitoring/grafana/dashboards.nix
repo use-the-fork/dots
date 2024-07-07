@@ -3,14 +3,12 @@
   pkgs,
   ...
 }: let
-  loadDashboard = file:
-    lib.pipe file [
-      lib.importJSON
-      ({dashboard, ...}: rec {
-        name = "provision-dashboard-${dashboard.uid}.json";
-        path = builtins.toFile name (builtins.toJSON dashboard);
-      })
-    ];
+  loadDashboard = file: let
+    dashboard = lib.importJSON file;
+  in rec {
+    name = "provision-dashboard-${dashboard.uid}.json";
+    path = builtins.toFile name (builtins.toJSON dashboard);
+  };
 
   dashboardsDir =
     pkgs.linkFarm

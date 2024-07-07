@@ -9,7 +9,7 @@
   cfg = sys.services;
   grafana = cfg.monitoring.grafana;
 in {
-  #  imports = [./dashboards.nix];
+  imports = [./dashboards.nix];
 
   config = mkIf cfg.monitoring.grafana.enable {
     networking.firewall.allowedTCPPorts = [grafana.settings.port];
