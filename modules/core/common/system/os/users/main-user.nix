@@ -31,6 +31,7 @@ in {
         "networkmanager"
         "power"
         "nix"
+        "caddy"
       ];
       uid = 1000;
     };

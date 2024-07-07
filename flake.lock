@@ -1125,6 +1125,26 @@
         "type": "github"
       }
     },
+    "nixos-caddy-cloudflare": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720076837,
+        "narHash": "sha256-PnT5CCO6lpdcwpNHBeBIZ9CNi/YbhJqM5Z5QTeKxEAk=",
+        "owner": "matt1432",
+        "repo": "nixos-caddy-cloudflare",
+        "rev": "3e6819b53a1ee75858b84ab0995d9335106d631a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "matt1432",
+        "repo": "nixos-caddy-cloudflare",
+        "type": "github"
+      }
+    },
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
@@ -1593,6 +1613,7 @@
         "nh": "nh",
         "nixfmt": "nixfmt",
         "nixos-anywhere": "nixos-anywhere",
+        "nixos-caddy-cloudflare": "nixos-caddy-cloudflare",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpak": "nixpak",

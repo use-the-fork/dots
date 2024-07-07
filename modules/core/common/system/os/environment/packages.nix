@@ -27,6 +27,7 @@
         rsync
         bind.dnsutils
         sops
+        nss
       ];
     };
   };

@@ -23,8 +23,8 @@ in {
         customDNS = {
           customTTL = "1h";
           mapping = {
-            "dash.my.lan" = "100.68.105.44";
-            "grafana.my.lan" = "100.68.105.44";
+            #            "prometheus.ramen.isdelicio.us" = "100.68.105.44";
+            #            "grafana.ramen.isdelicio.us" = "100.68.105.44";
           };
         };
         # Redirect all .lan queries to the router
