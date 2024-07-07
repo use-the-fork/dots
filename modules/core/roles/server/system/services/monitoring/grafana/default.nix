@@ -7,11 +7,12 @@
 
   sys = config.modules.system;
   cfg = sys.services;
+  grafana = cfg.monitoring.grafana;
 in {
-  config = mkIf cfg.monitoring.grafana.enable {
-    imports = [./dashboards.nix];
+  #  imports = [./dashboards.nix];
 
-    networking.firewall.allowedTCPPorts = [config.services.grafana.settings.server.http_port];
+  config = mkIf cfg.monitoring.grafana.enable {
+    networking.firewall.allowedTCPPorts = [grafana.settings.port];
 
     modules.system.services.database = {
       postgresql.enable = true;
@@ -19,9 +20,9 @@ in {
 
     services = {
       #Enable caddy for grafana
-      caddy.virtualHosts."grafana.my.lan".extraConfig = ''
-        tls internal
-        reverse_proxy 127.0.0.1:3000
+      caddy.virtualHosts."${grafana.settings.subDomain}".extraConfig = ''
+        import ${config.sops.templates.cf-tls.path}
+        reverse_proxy ${grafana.settings.host}:${builtins.toString grafana.settings.port}
       '';
 
       grafana = {
@@ -29,10 +30,10 @@ in {
         settings = {
           server = {
             http_addr = "0.0.0.0";
-            http_port = 3000;
+            http_port = grafana.settings.port;
 
-            root_url = "https://grafana.my.lan";
-            domain = "grafana.my.lan";
+            root_url = "https://${grafana.settings.subDomain}";
+            domain = grafana.settings.subDomain;
             enforce_domain = true;
           };
 
