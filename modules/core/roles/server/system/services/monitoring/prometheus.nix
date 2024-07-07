@@ -12,9 +12,9 @@ in {
   config = mkIf prome.enable {
     services = {
       #Enable caddy for prometheus
-      caddy.virtualHosts."${prome.subDomain}".extraConfig = ''
-        tls internal
-        reverse_proxy ${prome.settings.host}:${prome.settings.port}
+      caddy.virtualHosts."${prome.settings.subDomain}".extraConfig = ''
+        import ${config.sops.templates.cf-tls.path}
+        reverse_proxy ${prome.settings.host}:${builtins.toString prome.settings.port}
       '';
 
       # Prometheus exporter for Grafana
