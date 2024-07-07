@@ -1,5 +1,5 @@
 {lib, ...}: let
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkOption types;
 
   mkEnableOption' = desc: mkEnableOption "${desc}" // {default = true;};
 in {
@@ -7,6 +7,24 @@ in {
     # networking
     networking = {
       blocky.enable = mkEnableOption "Blocky";
+
+      ip = {
+        private = mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            The private ip of this machine.
+          '';
+        };
+
+        tailscale = mkOption {
+          type = types.str;
+          default = "";
+          description = ''
+            The tailscale ip of this machine.
+          '';
+        };
+      };
 
       tailscale = {
         enable = mkEnableOption' "Tailscale";

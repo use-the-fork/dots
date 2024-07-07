@@ -53,9 +53,11 @@
         modules = concatLists [
           (singleton {
             networking.hostName = args.hostname;
-            networking.domainName = args.domain;
-            networking.ip.private = args.ipPrivate;
-            networking.ip.tailscale = args.ipTailscale;
+            modules.network.domain = args.domain;
+
+            modules.system.networking.ip.private = args.ipPrivate;
+            modules.system.networking.ip.tailscale = args.ipTailscale;
+
             nixpkgs = {
               hostPlatform = mkDefault args.system;
               flake.source = nixpkgs.outPath;
