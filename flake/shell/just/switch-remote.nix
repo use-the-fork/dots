@@ -8,7 +8,7 @@
           set -euo pipefail
 
           # Call nixos-rebuild on remote system
-          nixos-rebuild switch \
+          sudo nixos-rebuild switch \
           --flake ".#{{target_system}}" \
           --target-host "{{target_system}}"
       '';
