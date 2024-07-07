@@ -16,7 +16,7 @@
   hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
 
   #TODO: This should be an option I think.
-  domain = "my.lan";
+  domain = "isdelicio.us";
 
   # serializing the modulePath to a variable
   # this is in case the modulePath changes depth (i.e modules becomes nixos/modules)

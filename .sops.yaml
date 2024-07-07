@@ -21,6 +21,12 @@ creation_rules:
           - *admin_sincore
           - *workstation_sushi
           - *server_ramen
+  - path_regex: secrets/networking/cloudflare.yaml$
+    key_groups:
+      - age:
+          - *admin_sincore
+          - *workstation_sushi
+          - *server_ramen
   - path_regex: secrets/development/openai.yaml$
     key_groups:
       - age:

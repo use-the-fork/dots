@@ -167,6 +167,11 @@
     # Personal package overlay
     nyxpkgs.url = "github:NotAShelf/nyxpkgs";
 
+    nixos-caddy-cloudflare = {
+      url = "github:matt1432/nixos-caddy-cloudflare";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # use my own wallpapers repository to provide various wallpapers as nix packages
     wallpkgs = {
       url = "github:use-the-fork/wallpkgs";
