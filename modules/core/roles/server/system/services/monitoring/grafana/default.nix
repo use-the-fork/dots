@@ -67,22 +67,22 @@ in {
           enable = true;
           datasources.settings = {
             datasources = [
-              #              (mkIf sys.services.monitoring.prometheus.enable {
-              #                name = "Prometheus";
-              #                type = "prometheus";
-              #                access = "proxy";
-              #                orgId = 1;
-              #                uid = "Y4SSG429DWCGDQ3R";
-              #                url = "http://127.0.0.1:${toString config.services.prometheus.port}";
-              #                isDefault = true;
-              #                version = 1;
-              #                editable = true;
-              #                jsonData = {
-              #                  graphiteVersion = "1.1";
-              #                  tlsAuth = false;
-              #                  tlsAuthWithCACert = false;
-              #                };
-              #              })
+              (mkIf sys.services.monitoring.prometheus.enable {
+                name = "Prometheus";
+                type = "prometheus";
+                access = "proxy";
+                orgId = 1;
+                uid = "Y4SSG429DWCGDQ3R";
+                url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+                isDefault = true;
+                version = 1;
+                editable = true;
+                jsonData = {
+                  graphiteVersion = "1.1";
+                  tlsAuth = false;
+                  tlsAuthWithCACert = false;
+                };
+              })
 
               #              (mkIf sys.services.monitoring.loki.enable {
               #                name = "Loki";

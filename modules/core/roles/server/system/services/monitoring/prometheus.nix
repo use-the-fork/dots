@@ -88,7 +88,7 @@ in {
           {
             job_name = "blocky";
             scrape_interval = "30s";
-            static_configs = [{targets = ["127.0.0.1:4000"];}];
+            static_configs = [{targets = ["localhost:4000"];}];
           }
           {
             job_name = "endlessh-go";
