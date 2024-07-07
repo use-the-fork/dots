@@ -1,10 +1,11 @@
 _: {
   perSystem = {pkgs, ...}: let
-    inherit (import ./utils.nix {inherit pkgs;}) mkHook;
+    inherit (import ./utils.nix {inherit pkgs;}) mkHook excludes;
   in {
     devenv.shells.default.pre-commit = {
-      check.enable = true;
-      settings = {
+      inherit excludes;
+      #      check.enable = true;
+      hooks = {
         alejandra = mkHook "alejandra" {enable = true;};
         actionlint = mkHook "actionlint" {enable = true;};
         treefmt = mkHook "treefmt" {enable = true;};
