@@ -32,6 +32,7 @@ in {
         "power"
         "nix"
         "caddy"
+        "unbound"
       ];
       uid = 1000;
     };

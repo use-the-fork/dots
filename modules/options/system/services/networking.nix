@@ -1,12 +1,30 @@
-{lib, ...}: let
-  inherit (lib) mkEnableOption mkOption types;
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkEnableOption mkOption types mkService;
+  meta = config.meta;
 
   mkEnableOption' = desc: mkEnableOption "${desc}" // {default = true;};
 in {
   options.modules.system = {
     # networking
     networking = {
-      blocky.enable = mkEnableOption "Blocky";
+      services = {
+        blocky = mkService {
+          name = "Blocky";
+          type = "dns";
+          port = 4000;
+          subDomain = "blocky.${meta.subDomainName}";
+        };
+        unbound = mkService {
+          name = "Unbound";
+          type = "dns";
+          port = 5335;
+          subDomain = "unbound.${meta.subDomainName}";
+        };
+      };
 
       ip = {
         private = mkOption {
