@@ -23,7 +23,20 @@
       };
 
       services = {
-        blocky.enable = true;
+        blocky = {
+          enable = true;
+          settings.clientGroups = {
+            noBlocky = [
+              "192.168.100.200" #Lisa - Iphone
+              "192.168.100.228" #Lisa - MacBook
+              "192.168.100.214" #Sushi
+            ];
+
+            hardcore = [
+              "192.168.100.152" #Sheild - Bedroom
+            ];
+          };
+        };
         unbound.enable = false;
       };
     };

@@ -17,7 +17,33 @@ in {
           type = "dns";
           port = 4000;
           subDomain = "blocky.${meta.subDomainName}";
+
+          extraOptions = {
+            clientGroups = {
+              default = mkOption {
+                type = types.listOf types.str;
+                default = [];
+                description = "The IPs of clients that should be in the default blocklist.";
+              };
+              kid = mkOption {
+                type = types.listOf types.str;
+                default = [];
+                description = "The IPs of clients that should be in the kid blocklist.";
+              };
+              hardcore = mkOption {
+                type = types.listOf types.str;
+                default = [];
+                description = "The IPs of clients that should be in the hardcore blocklist.";
+              };
+              noBlocky = mkOption {
+                type = types.listOf types.str;
+                default = [];
+                description = "The IPs of clients that shouldn't be blocked.";
+              };
+            };
+          };
         };
+
         unbound = mkService {
           name = "Unbound";
           type = "dns";
