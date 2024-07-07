@@ -21,6 +21,11 @@
         enable = true;
         autoConnect = true;
       };
+
+      services = {
+        blocky.enable = true;
+        unbound.enable = false;
+      };
     };
 
     virtualization = {
@@ -31,8 +36,6 @@
     };
 
     services = {
-      blocky.enable = true;
-
       caddy.enable = true;
 
       monitoring = {

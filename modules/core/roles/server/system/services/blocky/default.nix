@@ -4,12 +4,20 @@
   ...
 }: let
   inherit (lib) mkIf;
+
+  sys = config.modules.system;
+  blocky = sys.networking.services.blocky;
 in {
-  config = mkIf config.modules.system.networking.blocky.enable {
+  config = mkIf blocky.enable {
+    #Enable caddy for prometheus
+    services.caddy.virtualHosts."${blocky.settings.subDomain}".extraConfig = ''
+      import ${config.sops.templates.cf-tls.path}
+      reverse_proxy ${blocky.settings.host}:${builtins.toString blocky.settings.port}
+    '';
+
     services.blocky = {
       enable = true;
       settings = {
-        port = 53; # Port for incoming DNS Queries.
         upstream.default = [
           "1.1.1.1"
           "8.8.8.8"
@@ -27,12 +35,6 @@ in {
             #            "grafana.ramen.isdelicio.us" = "100.68.105.44";
           };
         };
-        # Redirect all .lan queries to the router
-        #        conditional = {
-        #          mapping = {
-        #            lan = "10.69.1.1";
-        #          };
-        #        };
         #Enable Blocking of certian domains.
         blocking = {
           blackLists = {
@@ -55,8 +57,8 @@ in {
           prefetching = true;
         };
         ports = {
-          dns = 53;
-          http = "127.0.0.1:4000";
+          dns = 53; # Port for incoming DNS Queries.
+          http = "${blocky.settings.host}:${builtins.toString blocky.settings.port}";
         };
       };
     };
