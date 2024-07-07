@@ -111,11 +111,11 @@
       --github-repo $GITHUB_REPO
     '';
   in {
-    just-flake.features.cliff = {
+    devenv.shells.default.just.recipes.changelog = {
       enable = true;
       justfile = ''
         # creates and updates the CHANGELOG.md using git-cliff.
-        cliff:
+        changelog:
           ${git-cliff-entry}/bin/git-cliff
       '';
     };

@@ -1,5 +1,5 @@
 {
   perSystem = _: {
-    just-flake.features.treefmt.enable = true;
+    devenv.shells.default.just.recipes.treefmt.enable = true;
   };
 }

@@ -20,7 +20,6 @@
         # parts of the flake
         #        ./flake/docs # genrates documentation for our system
         ./flake/lib # extended library on top of `nixpkgs.lib`
-        ./flake/pre-commit # pre-commit hooks, performed before each commit inside the devShell
 
         ./flake/args # args that are passed to the flake.
         ./flake/packages # packages that are loaded recursivly based on the packages directory.
@@ -113,7 +112,7 @@
     just-flake.url = "github:juspay/just-flake";
 
     #    devenv.url = "path:/home/sincore/source/devenv";
-    devenv.url = "github:use-the-fork/devenv";
+    devenv.url = "github:use-the-fork/devenv/temporary-until-merge";
 
     # guess what this does
     # come on, try

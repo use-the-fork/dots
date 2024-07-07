@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    just-flake.features.switch-remote = {
+    devenv.shells.default.just.recipes.switch-remote = {
       enable = true;
       justfile = ''
         # run a rebuild on a remote system.

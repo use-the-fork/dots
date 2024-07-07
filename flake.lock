@@ -61,15 +61,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1719352549,
-        "narHash": "sha256-d3Jy13L9RMsVs3QoRjQamwLO2B3S7qqL4b2Ewt0G/u8=",
+        "lastModified": 1720038501,
+        "narHash": "sha256-HHJxfVxHPj2tUj3RkegStq+3bRJ0W5kKmnwrHt4p3Qg=",
         "owner": "use-the-fork",
         "repo": "devenv",
-        "rev": "d1aec833a857bc242677af87e9f0708380c29310",
+        "rev": "39792649b49d6c6d39bac14cb4c4d16f4cde78b1",
         "type": "github"
       },
       "original": {
         "owner": "use-the-fork",
+        "ref": "temporary-until-merge",
         "repo": "devenv",
         "type": "github"
       }

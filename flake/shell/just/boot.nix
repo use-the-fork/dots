@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    just-flake.features.boot = {
+    devenv.shells.default.just.recipes.boot = {
       enable = true;
       justfile = ''
         # Rebuild the system using `nh os boot`

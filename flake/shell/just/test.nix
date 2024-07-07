@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    just-flake.features.test = {
+    devenv.shells.default.just.recipes.test = {
       enable = true;
       justfile = ''
         # Rebuild the system using `nh os test`
