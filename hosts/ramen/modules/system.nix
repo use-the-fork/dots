@@ -26,13 +26,34 @@
         blocky = {
           enable = true;
           settings.clientGroups = {
-            lisa = {
+            sushi = {
+              addresses = [
+                "192.168.100.214" #Sushi
+              ];
+              groupsBlock = [];
+            };
+
+            greg-phone = {
+              addresses = [
+                "192.168.100.3"
+              ];
+              groupsBlock = [];
+            };
+
+            lisa-iphone = {
               addresses = [
                 "192.168.100.200" #Lisa - Iphone
+              ];
+              groupsBlock = [];
+            };
+
+            lisa-macbook = {
+              addresses = [
                 "192.168.100.228" #Lisa - MacBook
               ];
               groupsBlock = [];
             };
+
             home-server = {
               addresses = [
                 "192.168.100.212"
@@ -40,14 +61,41 @@
               groupsBlock = [];
             };
 
-            sincore = {
+            envisalink = {
               addresses = [
-                "192.168.100.214" #Sushi
+                "192.168.100.234"
               ];
               groupsBlock = [];
             };
 
-            televisions = {
+            tempura = {
+              addresses = [
+                "192.168.100.189"
+              ];
+              groupsBlock = [];
+            };
+
+            emma-tablet = {
+              addresses = [
+                "192.168.100.48" #Tablet
+              ];
+              groupsBlock = [
+                "ads"
+                "adult"
+              ];
+            };
+
+            emma-phone = {
+              addresses = [
+                "192.168.100.42" #Phone
+              ];
+              groupsBlock = [
+                "ads"
+                "adult"
+              ];
+            };
+
+            sheild-bedroom = {
               addresses = [
                 "192.168.100.152" #Sheild - Bedroom
               ];
@@ -56,6 +104,15 @@
                 "adult"
                 "hardcore"
               ];
+            };
+
+            eero = {
+              addresses = [
+                "192.168.100.95"
+                "192.168.100.246"
+                "192.168.100.248"
+              ];
+              groupsBlock = [];
             };
           };
         };
