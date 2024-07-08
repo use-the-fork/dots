@@ -19,27 +19,20 @@ in {
           subDomain = "blocky.${meta.subDomainName}";
 
           extraOptions = {
-            clientGroups = {
-              default = mkOption {
-                type = types.listOf types.str;
-                default = [];
-                description = "The IPs of clients that should be in the default blocklist.";
-              };
-              kid = mkOption {
-                type = types.listOf types.str;
-                default = [];
-                description = "The IPs of clients that should be in the kid blocklist.";
-              };
-              hardcore = mkOption {
-                type = types.listOf types.str;
-                default = [];
-                description = "The IPs of clients that should be in the hardcore blocklist.";
-              };
-              noBlocky = mkOption {
-                type = types.listOf types.str;
-                default = [];
-                description = "The IPs of clients that shouldn't be blocked.";
-              };
+            clientGroups = mkOption {
+              type = types.attrsOf (types.submodule {
+                options = {
+                  addresses = mkOption {
+                    type = types.listOf types.str;
+                    description = "List of IP addresses.";
+                  };
+                  groupsBlock = mkOption {
+                    type = types.listOf types.str;
+                    description = "List of groups to block.";
+                  };
+                };
+              });
+              description = "Client groups with nested attributes: addresses and groupsBlock.";
             };
           };
         };

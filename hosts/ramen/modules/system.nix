@@ -26,15 +26,37 @@
         blocky = {
           enable = true;
           settings.clientGroups = {
-            noBlocky = [
-              "192.168.100.200" #Lisa - Iphone
-              "192.168.100.228" #Lisa - MacBook
-              "192.168.100.214" #Sushi
-            ];
+            lisa = {
+              addresses = [
+                "192.168.100.200" #Lisa - Iphone
+                "192.168.100.228" #Lisa - MacBook
+              ];
+              groupsBlock = [];
+            };
+            home-server = {
+              addresses = [
+                "192.168.100.212"
+              ];
+              groupsBlock = [];
+            };
 
-            hardcore = [
-              "192.168.100.152" #Sheild - Bedroom
-            ];
+            sincore = {
+              addresses = [
+                "192.168.100.214" #Sushi
+              ];
+              groupsBlock = [];
+            };
+
+            televisions = {
+              addresses = [
+                "192.168.100.152" #Sheild - Bedroom
+              ];
+              groupsBlock = [
+                "ads"
+                "adult"
+                "hardcore"
+              ];
+            };
           };
         };
         unbound.enable = false;
