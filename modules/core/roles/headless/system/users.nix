@@ -14,7 +14,6 @@
     countSessions = ''${util "who"} -q | ${util "head"} -n1 | ${util "wc"} -w'';
   in ''
     (
-
     # Get the common color codes from lib
     ${toString lib.common.shellColors}
 

@@ -14,13 +14,14 @@
   validators = import' ./validators.nix; # validate system conditions
   helpers = import' ./helpers {inherit lib self;}; # helper functions
   hardware = import' ./hardware.nix; # hardware capability checks
+  secrets = import' ./secrets.nix; # agenix secret abstraction
 
   # aliases for commonly used strings or functions
   aliases = import' ./aliases.nix;
 
   xdgTemplate = {xdgTemplate = ./xdg.nix;}; # xdg user directories & templates
 
-  importedLibs = [builders services validators helpers hardware aliases xdgTemplate];
+  importedLibs = [builders services secrets validators helpers hardware aliases xdgTemplate];
   extendedLib = lib.extend (_: _: foldl recursiveUpdate {} importedLibs);
 in {
   perSystem = {

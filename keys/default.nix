@@ -14,10 +14,11 @@ let
     # hosts
     suhsi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITeldysWRlM603quJfPY/d6Vy23Bkp+w81zwJGO8F4w root@sushi";
     ramen = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL4HTn7sF6h2gAHBLI/ywPkDnXNUV9D6CiaqnAwb9cbN root@ramen";
+    plex-bento = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKc7Yq09ux5NfgCEJwMDKSJFqXwshQ9C6C5eRcYJd0+U root@plex";
   };
 
   # aliases - Update the below to group your workstations or servers so that these public keys are used across all of them.
-  servers = attrValues {inherit (machines) ramen;};
+  servers = attrValues {inherit (machines) ramen plex-bento;};
   workstations = attrValues {inherit (machines) suhsi;};
 in {
   inherit (utils) mkGlobal;

@@ -26,7 +26,6 @@
         tmux
         direnv
         nix-direnv
-        sops
         rage
         ssh-to-age
         pwgen

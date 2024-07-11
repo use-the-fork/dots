@@ -21,12 +21,12 @@
         curl
         wget
         pciutils
+        inputs'.agenix.packages.default
         inputs'.devenv.packages.default
         lshw
         man-pages
         rsync
         bind.dnsutils
-        sops
         nss
       ];
     };

@@ -13,7 +13,7 @@ in {
     services = {
       #Enable caddy for prometheus
       caddy.virtualHosts."${prome.settings.subDomain}".extraConfig = ''
-        import ${config.sops.templates.cf-tls.path}
+        import ${config.age.secrets.caddy-cloudflare-key.path}
         reverse_proxy ${prome.settings.host}:${builtins.toString prome.settings.port}
       '';
 

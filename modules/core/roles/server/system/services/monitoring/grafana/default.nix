@@ -21,7 +21,7 @@ in {
     services = {
       #Enable caddy for grafana
       caddy.virtualHosts."${grafana.settings.subDomain}".extraConfig = ''
-        import ${config.sops.templates.cf-tls.path}
+        import ${config.age.secrets.caddy-cloudflare-key.path}
         reverse_proxy ${grafana.settings.host}:${builtins.toString grafana.settings.port}
       '';
 

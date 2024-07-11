@@ -20,7 +20,7 @@ in {
 
     #Enable caddy for prometheus
     services.caddy.virtualHosts."${blocky.settings.subDomain}".extraConfig = ''
-      import ${config.sops.templates.cf-tls.path}
+      import ${config.age.secrets.caddy-cloudflare-key.path}
       reverse_proxy ${blocky.settings.host}:${builtins.toString blocky.settings.port}
     '';
 

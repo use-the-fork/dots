@@ -11,7 +11,7 @@ in {
   config = mkIf unbound.enable {
     #Enable caddy for prometheus
     services.caddy.virtualHosts."${unbound.settings.subDomain}".extraConfig = ''
-      import ${config.sops.templates.cf-tls.path}
+      import ${config.age.secrets.caddy-cloudflare-key.path}
       reverse_proxy ${unbound.settings.host}:${builtins.toString unbound.settings.port}
     '';
 

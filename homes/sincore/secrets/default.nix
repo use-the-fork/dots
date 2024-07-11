@@ -1,18 +1,4 @@
-{
-  lib,
-  inputs,
-  ...
-}: {
-  imports = [
-    inputs.sops-nix.homeManagerModules.sops
-  ];
-
+_: {
   config = {
-    sops = {
-      defaultSopsFile = lib.my.getSecretFile "default.yaml";
-      age = {
-        keyFile = "~/.config/sops/age/keys.txt";
-      };
-    };
   };
 }

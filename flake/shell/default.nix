@@ -9,6 +9,7 @@
 
   perSystem = _: {
     devenv.shells.default = {
+      devenv.root = "file+file:///home/sincore/.config/dots";
     };
   };
 }

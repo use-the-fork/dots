@@ -11,7 +11,7 @@
 
   ## flake inputs ##
   hw = inputs.nixos-hardware.nixosModules; # hardware compat for pi4 and other quirky devices
-  sops-nix = inputs.sops-nix.nixosModules.default; # secret encryption via age
+  agenix = inputs.agenix.nixosModules.default; # secret encryption via age
   disko = inputs.disko.nixosModules.disko; # disko for disk setup and easier volume mangment.
   hm = inputs.home-manager.nixosModules.home-manager; # home-manager nixos module
 
@@ -47,7 +47,7 @@
     common # the "sane" default shared across systems
     options # provide options for defined modules across the system
     disko # TODO: should this be on a per host or shared?
-    sops-nix # age encryption for secrets
+    agenix # age encryption for secrets
     profiles # profiles program overrides per-host
   ];
 in {
@@ -87,6 +87,24 @@ in {
         laptop
       ]
       ++ concatLists [shared homes];
+    specialArgs = {inherit lib;};
+  };
+
+  plex-bento = mkNixosSystem {
+    inherit withSystem;
+    hostname = "plex.bento";
+    system = "x86_64-linux";
+    inherit domain;
+    ipPrivate = "192.168.100.40";
+    ipTailscale = "";
+    modules =
+      [
+        "${inputs.nixpkgs}/nixos/modules/virtualisation/proxmox-lxc.nix"
+        ./bento-plex
+        server
+        headless
+      ]
+      ++ shared;
     specialArgs = {inherit lib;};
   };
 

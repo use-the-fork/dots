@@ -28,7 +28,7 @@ in {
         StreamLocalBindUnlink = "yes";
 
         KbdInteractiveAuthentication = mkDefault false;
-        UseDns = false; # no
+        UseDns = true; # yes :(
         X11Forwarding = false; # ew xorg
 
         # kick out inactive sessions

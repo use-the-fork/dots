@@ -15,7 +15,7 @@
       imports = [
         # parts and modules from inputs
         inputs.flake-parts.flakeModules.easyOverlay
-        inputs.treefmt-nix.flakeModule
+        inputs.nixos-generators.nixosModules.all-formats
 
         # parts of the flake
         #        ./flake/docs # genrates documentation for our system
@@ -58,8 +58,8 @@
     };
 
     #Shhhhhhh it's a secret.
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
+    agenix = {
+      url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -188,6 +188,9 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix2container.url = "github:nlewo/nix2container";
+    nix2container.inputs = {nixpkgs.follows = "nixpkgs";};
 
     # Hyprland & Hyprland Contrib repos
     # to be able to use the binary cache, we should avoid
