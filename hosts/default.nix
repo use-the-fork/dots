@@ -90,21 +90,21 @@ in {
     specialArgs = {inherit lib;};
   };
 
-  plex-bento = mkNixosSystem {
+  # 🍱 Bento - Main Media Server
+  # XYZ
+  bento = mkNixosSystem {
     inherit withSystem;
-    hostname = "plex.bento";
-    system = "x86_64-linux";
+    hostname = "bento";
     inherit domain;
-    ipPrivate = "192.168.100.40";
+    ipPrivate = "192.168.100.233";
     ipTailscale = "";
+    system = "x86_64-linux";
     modules =
       [
-        "${inputs.nixpkgs}/nixos/modules/virtualisation/proxmox-lxc.nix"
-        ./bento-plex
+        ./bento
         server
-        headless
       ]
-      ++ shared;
+      ++ concatLists [shared homes];
     specialArgs = {inherit lib;};
   };
 

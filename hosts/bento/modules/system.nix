@@ -5,12 +5,16 @@
     autoLogin = true;
 
     boot = {
-      #      loader = "systemd-boot";
-      enableKernelTweaks = false;
-      initrd.enableTweaks = false;
+      loader = "systemd-boot";
+      enableKernelTweaks = true;
+      initrd.enableTweaks = true;
       loadRecommendedModules = true;
       tmpOnTmpfs = true;
     };
+
+    video.enable = true;
+    sound.enable = false;
+    bluetooth.enable = false;
 
     networking = {
       tailscale = {
@@ -18,6 +22,14 @@
         autoConnect = true;
       };
     };
+
+    virtualization = {
+      enable = true;
+      docker.enable = true;
+      qemu.enable = false;
+      podman.enable = false;
+    };
+
     programs = {
       cli.enable = true;
 
