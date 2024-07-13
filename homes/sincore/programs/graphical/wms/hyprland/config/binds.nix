@@ -24,6 +24,7 @@ in {
 
         # Daily Applications
         "$MOD,F1,exec,google-chrome-stable" # browser
+        "$MOD,F2,exec,phpstorm" # ide
         #        ''$MOD,F2,exec,run-as-service $(kitty)'' # file manager
         "$MOD,RETURN,exec, run-as-service $(foot)" # terminal
         "$MOD,D,exec, killall rofi || run-as-service $(rofi -show drun)" # application launcher
