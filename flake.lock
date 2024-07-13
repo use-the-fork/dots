@@ -1039,26 +1039,6 @@
         "type": "github"
       }
     },
-    "ndg": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1718464244,
-        "narHash": "sha256-cB0vYEY2KiYgfbjl+2zn1i4WnllUxV0hUpdIZJkJ/N4=",
-        "path": "/home/sincore/source/ndg",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/sincore/source/ndg",
-        "type": "path"
-      }
-    },
     "nh": {
       "inputs": {
         "nixpkgs": [
@@ -1700,7 +1680,6 @@
         "impermanence": "impermanence",
         "just-flake": "just-flake",
         "lanzaboote": "lanzaboote",
-        "ndg": "ndg",
         "nh": "nh",
         "nix2container": "nix2container",
         "nixfmt": "nixfmt",

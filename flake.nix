@@ -73,15 +73,6 @@
     # Repo for hardware-specific NixOS modules
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    ndg = {
-      #      url = "github:use-the-fork/ndg";
-      url = "path:/home/sincore/source/ndg";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     # Nix wrapper for building and testing my system
     nh = {
       url = "github:viperML/nh";
