@@ -3,10 +3,8 @@
   config,
   ...
 }: let
-  inherit (lib) mkEnableOption mkOption types mkService;
+  inherit (lib) mkOption types mkService;
   meta = config.meta;
-
-  mkEnableOption' = desc: mkEnableOption "${desc}" // {default = true;};
 in {
   options.modules.system = {
     # networking
@@ -61,12 +59,6 @@ in {
             The tailscale ip of this machine.
           '';
         };
-      };
-
-      tailscale = {
-        enable = mkEnableOption' "Tailscale";
-        manageSSH = mkEnableOption' "Set tailscale to manage connections";
-        autoConnect = mkEnableOption "Autoconnect to tailscale";
       };
     };
   };

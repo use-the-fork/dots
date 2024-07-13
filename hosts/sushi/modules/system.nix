@@ -18,13 +18,6 @@
     printing.enable = true;
     printing."3d".enable = true;
 
-    networking = {
-      tailscale = {
-        enable = true;
-        autoConnect = true;
-      };
-    };
-
     security = {
       fprint.enable = true;
     };
@@ -34,6 +27,14 @@
       docker.enable = true;
       qemu.enable = false;
       podman.enable = false;
+    };
+
+    networking = {
+      tailscale = {
+        enable = true;
+        isServer = false;
+        isClient = true;
+      };
     };
 
     services = {

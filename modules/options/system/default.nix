@@ -21,6 +21,8 @@ in {
     #    ./emulation.nix
     ./virtualization.nix
 
+    ./networking
+
     # package and program related options
     ./services
     ./programs
