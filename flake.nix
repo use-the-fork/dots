@@ -15,7 +15,6 @@
       imports = [
         # parts and modules from inputs
         inputs.flake-parts.flakeModules.easyOverlay
-        inputs.nixos-generators.nixosModules.all-formats
 
         # parts of the flake
         #        ./flake/docs # genrates documentation for our system
@@ -103,7 +102,7 @@
     just-flake.url = "github:juspay/just-flake";
 
     #    devenv.url = "path:/home/sincore/source/devenv";
-    devenv.url = "github:use-the-fork/devenv/temporary-until-merge";
+    devenv.url = "github:use-the-fork/devenv";
 
     # guess what this does
     # come on, try
