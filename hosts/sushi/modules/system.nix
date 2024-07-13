@@ -62,7 +62,7 @@
       realvnc-vnc-viewer.enable = true;
 
       default = {
-        terminal = "kitty";
+        terminal = "foot";
       };
     };
   };

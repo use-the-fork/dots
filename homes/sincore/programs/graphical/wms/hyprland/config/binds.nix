@@ -25,7 +25,7 @@ in {
         # Daily Applications
         "$MOD,F1,exec,google-chrome-stable" # browser
         #        ''$MOD,F2,exec,run-as-service $(kitty)'' # file manager
-        "$MOD,RETURN,exec, run-as-service $(kitty)" # terminal
+        "$MOD,RETURN,exec, run-as-service $(foot)" # terminal
         "$MOD,D,exec, killall rofi || run-as-service $(rofi -show drun)" # application launcher
         "$MOD,Space,exec, killall rofi || run-as-service $(rofi -show drun)" # application launcher
         #        "$MOD,equal,exec, killall rofi || run-as-service $(rofi -show calc)" # calc plugin for rofi
