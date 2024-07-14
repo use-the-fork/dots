@@ -1,9 +1,10 @@
 {
+  pkgs,
   lib,
-  config,
   ...
 }: let
-  inherit (lib) mkForce mkDefault;
+  inherit (lib.modules) mkDefault mkForce;
+  inherit (lib.meta) getExe';
 in {
   config = {
     security = {
@@ -39,44 +40,61 @@ in {
         # this is a better approach for making certain commands sudo-less instead of
         # allowing the wheel users to run *anything* without password
         # FIXME: something is missing, causing the rebuilds to ask for sudo regardless
-        extraRules = [
+
+        extraRules = let
+          sudoRules = with pkgs; [
+            {
+              package = coreutils;
+              command = "sync";
+            }
+            {
+              package = hdparm;
+              command = "hdparm";
+            }
+            {
+              package = nixos-rebuild;
+              command = "nixos-rebuild";
+            }
+            {
+              package = nvme-cli;
+              command = "nvme";
+            }
+            {
+              package = systemd;
+              command = "poweroff";
+            }
+            {
+              package = systemd;
+              command = "reboot";
+            }
+            {
+              package = systemd;
+              command = "shutdown";
+            }
+            {
+              package = systemd;
+              command = "systemctl";
+            }
+            {
+              package = util-linux;
+              command = "dmesg";
+            }
+          ];
+
+          mkSudoRule = rule: {
+            command = getExe' rule.package rule.command;
+            options = ["NOPASSWD"];
+          };
+
+          sudoCommands = map mkSudoRule sudoRules;
+        in [
           {
             # allow wheel group to run nixos-rebuild without password
             # this is a less vulnerable alternative to having wheelNeedsPassword = false
             # whitelist switch-to-configuration, allows --target-host option
             # to deploy to remote servers without reading password from STDIN
             groups = ["wheel"];
-            commands = let
-              currentSystem = "/run/current-system/";
-              storePath = "/nix/store/";
-            in [
-              {
-                command = "${storePath}/*/bin/switch-to-configuration";
-                options = ["SETENV" "NOPASSWD"];
-              }
-              {
-                command = "${currentSystem}/sw/bin/nix-store";
-                options = ["SETENV" "NOPASSWD"];
-              }
-              {
-                command = "${currentSystem}/sw/bin/nix-env";
-                options = ["SETENV" "NOPASSWD"];
-              }
-              {
-                command = "${currentSystem}/sw/bin/nixos-rebuild";
-                options = ["NOPASSWD"];
-              }
-              {
-                # let wheel group collect garbage without password
-                command = "${currentSystem}/sw/bin/nix-collect-garbage";
-                options = ["SETENV" "NOPASSWD"];
-              }
-              {
-                # let wheel group interact with systemd without password
-                command = "${currentSystem}/sw/bin/systemctl";
-                options = ["NOPASSWD"];
-              }
-            ];
+            commands = sudoCommands;
           }
         ];
       };
