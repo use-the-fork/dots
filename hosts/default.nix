@@ -23,7 +23,7 @@
   modulePath = ../modules;
 
   coreModules = modulePath + /core; # the path where common modules reside
-  #  extraModules = modulePath + /extra; # the path where extra modules reside
+  extraModules = modulePath + /extra; # the path where extra modules reside
   options = modulePath + /options; # the module that provides the options for my system configuration
 
   ## common modules ##
@@ -38,12 +38,16 @@
   server = coreModules + /roles/server; # for devices that are of the server type - provides online services
   laptop = coreModules + /roles/laptop; # for devices that are of the laptop type - provides power optimizations
 
+  # extra modules - optional but likely critical to a successful build
+  sharedModules = extraModules + /shared; # the path where shared modules reside
+
   # home-manager
   homesDir = ../homes; # home-manager configurations for hosts that need home-manager
   homes = [hm homesDir]; # combine hm flake input and the home module to be imported together
 
   # a list of shared modules that ALL systems need
   shared = [
+    sharedModules
     common # the "sane" default shared across systems
     options # provide options for defined modules across the system
     disko # TODO: should this be on a per host or shared?
