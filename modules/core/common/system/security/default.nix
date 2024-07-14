@@ -10,7 +10,7 @@
   imports = [
     #    ./apparmor.nix # apparmor configuration and policies
     ./auditd.nix # auditd
-    ./fs.nix # filesystem hardening
+    #    ./fs.nix # filesystem hardening
     #    ./clamav.nix # clamav antivirus
     ./fprint.nix # fingerprint driver and login support
     #    ./kernel.nix # kernel hardening
