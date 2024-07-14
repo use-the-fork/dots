@@ -14,27 +14,36 @@ in {
 
     users.users."${sys.mainUser}" = {
       isNormalUser = true;
+
+      # Home directory
+      createHome = true;
+      home = "/home/${sys.mainUser}";
+
       shell = pkgs.zsh;
       initialPassword = "changeme";
       openssh.authorizedKeys.keys = keys;
       extraGroups = [
         "wheel"
-        "gitea"
-        "docker"
         "systemd-journal"
-        "vboxusers"
         "audio"
-        "plugdev"
         "video"
         "input"
+        "plugdev"
         "lp"
-        "networkmanager"
+        "tss"
         "power"
         "nix"
+        "network"
+        "networkmanager"
+        "wireshark"
+        "mysql"
+        "docker"
+        "podman"
+        "git"
+        "libvirtd"
         "caddy"
         "unbound"
       ];
-      uid = 1000;
     };
   };
 }
