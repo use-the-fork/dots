@@ -15,6 +15,7 @@
       imports = [
         # parts and modules from inputs
         inputs.flake-parts.flakeModules.easyOverlay
+        inputs.just-flake.flakeModule
 
         # parts of the flake
         #        ./flake/docs # genrates documentation for our system
@@ -23,7 +24,10 @@
         ./flake/args # args that are passed to the flake.
         ./flake/packages # packages that are loaded recursivly based on the packages directory.
         ./flake/iso-images # local installation media
-        ./flake/shell # devShells exposed by the flake
+        ./flake/git-hooks
+        ./flake/just
+        ./flake/treefmt.nix
+        ./flake/shell.nix # devShells exposed by the flake
       ];
 
       flake = {
@@ -92,17 +96,11 @@
       flake = false;
     };
 
-    # Project shells
-    devshell = {
-      url = "github:numtide/devshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #ai-shell
+    ai-shell.url = "github:use-the-fork/ai-shell/feature/nix";
 
     #Devshell conviance commands
     just-flake.url = "github:juspay/just-flake";
-
-    #    devenv.url = "path:/home/sincore/source/devenv";
-    devenv.url = "github:use-the-fork/devenv";
 
     # guess what this does
     # come on, try
@@ -148,7 +146,6 @@
       url = "github:nix-community/lanzaboote";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
         flake-compat.follows = "flake-compat";
       };
     };
