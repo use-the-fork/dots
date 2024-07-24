@@ -7,4 +7,5 @@ in {
   "client/tailscale.age".publicKeys = mkGlobal (workstations ++ servers);
   "client/cloudflare.age".publicKeys = mkGlobal (workstations ++ servers);
   "service/caddy-cloudflare.age".publicKeys = mkGlobal (workstations ++ servers);
+  "service/ai-shell.age".publicKeys = mkGlobal (workstations ++ servers);
 }

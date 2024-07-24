@@ -14,6 +14,13 @@ in {
   ];
 
   age.secrets = {
+    ai-shell = mkAgenixSecret true {
+      file = "service/ai-shell.age";
+      owner = sys.mainUser;
+      group = "users";
+      mode = "400";
+    };
+
     tailscale-client = mkAgenixSecret true {
       file = "client/tailscale.age";
       owner = sys.mainUser;
