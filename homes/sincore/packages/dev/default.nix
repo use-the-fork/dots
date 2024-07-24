@@ -12,7 +12,6 @@ in {
     home.packages = with pkgs; [
       jetbrains.datagrip
       jetbrains.phpstorm
-      jetbrains.idea-ultimate
       jetbrains.pycharm-professional
     ];
   };
