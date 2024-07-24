@@ -3,7 +3,6 @@
   lib,
   ...
 }: let
-  inherit (builtins) concatStringsSep;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.lists) optionals concatLists;
   inherit (lib.types) str listOf bool nullOr;
@@ -67,7 +66,8 @@ in {
           cfg.flags.default
           (optionals (cfg.authkey != null) ["--authkey file:${config.age.secrets.tailscale-client.path}"])
           (optionals (cfg.operator != null) ["--operator ${cfg.operator}"])
-          (optionals (cfg.tags != []) ["--advertise-tags" (concatStringsSep "," cfg.tags)])
+          #          FIXME: this has to be updated to allow for ACL rules to work in the tailscale interface.
+          #          (optionals (cfg.tags != []) ["--advertise-tags" (concatStringsSep "," cfg.tags)])
           (optionals cfg.isServer ["--advertise-exit-node"])
         ];
 
