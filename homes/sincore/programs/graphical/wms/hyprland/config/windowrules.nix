@@ -39,7 +39,7 @@
 
         # JetBrains - Enhanced rules
         # -- Fix odd behaviors in IntelliJ IDEs --
-        "windowdance,class:^(jetbrains-.*)$,floating:1"
+        #        "windowdance,class:^(jetbrains-.*)$,floating:1"
 
         #! Fix splash screen showing in weird places and prevent annoying focus takeovers
         "center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
