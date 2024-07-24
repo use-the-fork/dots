@@ -4,7 +4,7 @@
     pkgs,
     ...
   }: {
-    devenv.shells.default.just.recipes.iso = {
+    just-flake.features.iso = {
       enable = true;
       justfile = ''
         # given a `target` build that systems iso and flash it to USB.

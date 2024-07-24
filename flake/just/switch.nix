@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    devenv.shells.default.just.recipes.switch = {
+    just-flake.features.switch = {
       enable = true;
       justfile = ''
         # Rebuild the system using `nh os switch`

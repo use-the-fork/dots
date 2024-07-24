@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    devenv.shells.default.just.recipes.flash = {
+    just-flake.features.flash = {
       enable = true;
       justfile = ''
         # flash a clean install to remote system.

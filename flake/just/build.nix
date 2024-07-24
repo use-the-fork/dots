@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    devenv.shells.default.just.recipes.build = {
+    just-flake.features.build = {
       enable = true;
       justfile = ''
         # given a `target` build that systems image.

@@ -1,6 +1,6 @@
 {
   perSystem = _: {
-    devenv.shells.default.just.recipes.bump = {
+    just-flake.features.bump = {
       enable = true;
       justfile = ''
         # update flake inputs commit flake lock.

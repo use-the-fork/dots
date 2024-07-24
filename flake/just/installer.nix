@@ -4,7 +4,7 @@
     pkgs,
     ...
   }: {
-    devenv.shells.default.just.recipes.installer = {
+    just-flake.features.installer = {
       enable = true;
       justfile = ''
         # builds and flashes USB installer.
