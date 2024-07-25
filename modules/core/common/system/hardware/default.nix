@@ -2,7 +2,8 @@
   imports = [
     ./cpu
     ./gpu
-    ./sound
+    ./multimedia
+
     ./generic.nix
     ./tpm.nix
     ./yubikey.nix
