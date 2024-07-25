@@ -1,4 +1,5 @@
 {
+  inputs',
   osConfig,
   lib,
   pkgs,
@@ -11,6 +12,9 @@
 in {
   config = mkIf prg.cli.enable {
     home.packages = with pkgs; [
+      # packages from inputs
+      inputs'.agenix.packages.default
+
       # CLI packages from nixpkgs
       catimg
       duf
