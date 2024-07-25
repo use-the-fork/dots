@@ -17,6 +17,19 @@ _: {
 
       # disable the usage of nixpkgs aliases in the configuration
       allowAliases = true;
+
+      # Enable parallel building by default. This, in theory, should speed up building
+      # derivations, especially rust ones. However setting this to true causes a mass rebuild
+      # of the *entire* system closure, so it must be handled with proper care.
+      enableParallelBuildingByDefault = false;
+
+      # List of derivation warnings to display while rebuilding.
+      #  See: <https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/check-meta.nix>
+      # NOTE: "maintainerless" can be added to emit warnings
+      # about packages without maintainers but it seems to me
+      # like there are more packages without maintainers than
+      # with maintainers, so it's disabled for the time being.
+      showDerivationWarnings = [];
     };
   };
 }

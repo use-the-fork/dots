@@ -6,49 +6,46 @@
   ...
 }: let
   inherit (self) inputs;
-  inherit (lib.attrsets) mapAttrsToList mapAttrs;
+  inherit (builtins) elem;
+  inherit (lib.trivial) pipe;
+  inherit (lib.types) isType;
+  inherit (lib.attrsets) mapAttrsToList filterAttrs mapAttrs mapAttrs';
 in {
   imports = [
+    ./transcend # module that merges trees outside central nixpkgs with our system's
+
     ./documentation.nix # nixos documentation
     ./nixpkgs.nix # global nixpkgs configuration.nix
     ./system.nix # nixos system configuration
   ];
 
-  environment = {
-    etc = with inputs; {
-      # link flake inputs to /etc as flake-channel for added backwards compatibility
-      # some of them can be used with special lookup paths (i.e. <nixpkgs>) if you
-      # really need to. but it should be noted that special lookup paths are discouraged
-      # and the only reason they are kept here is for backwards compatibility only.
-      "nix/flake-channels/nixpkgs".source = nixpkgs;
-      "nix/flake-channels/home-manager".source = home-manager;
-      "nix/flake-channels/nyxpkgs".source = nyxpkgs;
-
-      # preserve the current flake path (aptly referred to as self) in /etc/nixos/flake
-      # to ensure the latest version of the configuration is available in a human-readable
-      # location in case of breakage where the bootloader is completely busted
-      # happens more often than I wish to admit
-      "nixos/flake".source = self;
-    };
-
-    # git is generally included in systemPackages
-    # but in case this file has somehow been isolated, then make sure git is there
-    # to ensure that flakes work as intended
-    systemPackages = [pkgs.gitMinimal];
-  };
+  environment.etc = let
+    inherit (config.nix) registry;
+    commonPaths = ["home-manager" "nixpkgs"];
+  in
+    pipe registry [
+      (filterAttrs (name: _: (elem name commonPaths)))
+      (mapAttrs' (name: value: {
+        name = "nix/path/${name}";
+        value.source = value.flake;
+      }))
+    ];
 
   nix = let
-    mappedRegistry = mapAttrs (_: v: {flake = v;}) inputs;
-    #    mappedRegistry = pipe inputs [
-    #      (filterAttrs (_: isType "flake"))
-    #      (mapAttrs (_: flake: {inherit flake;}))
-    #      (x: x // {nixpkgs.flake = inputs.nixpkgs;})
-    #    ];
+    mappedRegistry = pipe inputs [
+      (filterAttrs (_: isType "flake"))
+      (mapAttrs (_: flake: {inherit flake;}))
+      (flakes: flakes // {nixpkgs.flake = inputs.nixpkgs;})
+    ];
   in {
-    package = pkgs.nixVersions.git;
+    # Lix, the higher performance Nix fork.
+    package = pkgs.lix;
 
-    # pin the registry to avoid downloading and evaling a new nixpkgs version every time
-    registry = mappedRegistry;
+    # Pin the registry to avoid downloading and evaluating
+    # a new nixpkgs version on each command causing a re-eval.
+    # This will add each flake input as a registry and make
+    # nix3 commands consistent with your flake.
+    registry = mappedRegistry // {default-flake = mappedRegistry.nixpkgs;};
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well
@@ -66,6 +63,7 @@ in {
       automatic = true;
       dates = "Sat *-*-* 03:00";
       options = "--delete-older-than 30d";
+      persistent = false; # don't try to catch up on missed GC runs
     };
 
     # automatically optimize nix store my removing hard links
@@ -81,8 +79,15 @@ in {
       # manually, as Nix won't do it for us
       use-xdg-base-directories = true;
 
-      # specify the path to the nix registry
-      flake-registry = "/etc/nix/registry.json";
+      # Allow usage of registry lookups (e.g. flake:*) but
+      # disallow internal flake registry by setting it to
+      # to a minimal JSON file with no flakes and a version
+      # identifier.
+      use-registries = true;
+      flake-registry = pkgs.writeText "flakes-empty.json" (builtins.toJSON {
+        flakes = [];
+        version = 2;
+      });
 
       # Free up to 10GiB whenever there is less than 5GB left.
       # this setting is in bytes, so we multiply with 1024 thrice
@@ -111,13 +116,20 @@ in {
       # extra architectures supported by my builders
       extra-platforms = config.boot.binfmt.emulatedSystems;
 
-      # continue building derivations if one fails
+      # Continue building derivations even if one fails
       keep-going = true;
 
-      # bail early on missing cache hits
+      # Fallback to local builds after remote builders are unavailable.
+      # Setting this too low on a slow network may cause remote builders
+      # to be discarded before a connection can be established.
       connect-timeout = 5;
 
-      # show more log lines for failed builds
+      # If we haven't received data for >= 20s, retry the download
+      stalled-download-timeout = 20;
+
+      # Show more logs when a build fails and decides to display
+      # a bunch of lines. `nix log` would normally provide more
+      # information, but this may save us some time and keystrokes.
       log-lines = 30;
 
       # enable new nix command and flakes
@@ -128,10 +140,10 @@ in {
         "recursive-nix" # let nix invoke itself
         "ca-derivations" # content addressed nix
         "auto-allocate-uids" # allow nix to automatically pick UIDs, rather than creating nixbld* user accounts
-        "configurable-impure-env" # allow impure environments
         "cgroups" # allow nix to execute builds inside cgroups
-        "git-hashing" # allow store objects which are hashed via Git's hashing algorithm
-        "verified-fetches" # enable verification of git commit signatures for fetchGit
+        "repl-flake" # allow passing installables to nix repl
+        "no-url-literals" # disallow deprecated url-literals, i.e., URLs without quotation
+        "dynamic-derivations" # allow "text hashing" derivation outputs, so we can build .drv files.
       ];
 
       # don't warn me that my git tree is dirty, I know
