@@ -32,6 +32,7 @@
     .pre-commit-config.yaml
     just-flake.just
     .direnv/
+    .sb/
   '';
 
   node = ''
@@ -45,6 +46,10 @@
     *.egg-info/
     __pycached__/
     .mypy_cache
+  '';
+
+  php = ''
+    vendor/
   '';
 
   ignore = lib.concatStringsSep "\n" [general c nix node ide python];
