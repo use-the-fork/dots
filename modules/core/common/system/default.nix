@@ -6,6 +6,7 @@
     ./nix
     ./os
     ./security
+    ./switch
     ./virtualisation
   ];
 }
