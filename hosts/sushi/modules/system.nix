@@ -10,6 +10,7 @@
       initrd.enableTweaks = true;
       loadRecommendedModules = true;
       tmpOnTmpfs = true;
+      plymouth.enable = true;
     };
 
     video.enable = true;

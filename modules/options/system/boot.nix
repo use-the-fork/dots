@@ -100,7 +100,7 @@ in {
 
       theme = mkOption {
         type = types.str;
-        default = "hud_3";
+        default = "loader";
         description = "The theme name from the selected theme pack";
       };
     };

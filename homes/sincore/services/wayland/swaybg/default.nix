@@ -18,7 +18,7 @@ in {
       swaybg = mkHyprlandService {
         Unit.Description = "Wallpaper chooser service";
         Service = let
-          wall = "${wallpkgs.catppuccin}/share/wallpapers/${style.wallpaper}";
+          wall = "${wallpkgs.cities}/share/wallpapers/${style.wallpaper}";
         in {
           ExecStart = "${getExe pkgs.swaybg} -i ${wall} -m fill";
           Restart = "always";
