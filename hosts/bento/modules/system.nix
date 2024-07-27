@@ -2,7 +2,6 @@
   modules.system = {
     mainUser = "sincore";
     fs = ["btrfs" "ext4" "vfat" "ntfs"];
-    autoLogin = true;
 
     boot = {
       loader = "systemd-boot";
@@ -19,7 +18,6 @@
     networking = {
       tailscale = {
         enable = true;
-        autoConnect = true;
       };
     };
 
