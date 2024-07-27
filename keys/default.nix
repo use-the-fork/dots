@@ -14,7 +14,7 @@ let
     # hosts
     suhsi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIITeldysWRlM603quJfPY/d6Vy23Bkp+w81zwJGO8F4w root@sushi";
     ramen = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL4HTn7sF6h2gAHBLI/ywPkDnXNUV9D6CiaqnAwb9cbN root@ramen";
-    bento = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINOMe+QV7NvtEnJe6n8XYWwvVmBpffgAr+p0iVkxfg3U root@bento";
+    bento = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILM7iuxDWRD8ATBHiWvxuqKG1l1iiadmX8/caimVLWHG root@bento";
   };
 
   # aliases - Update the below to group your workstations or servers so that these public keys are used across all of them.
