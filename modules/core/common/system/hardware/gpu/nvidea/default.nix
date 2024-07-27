@@ -60,8 +60,9 @@ in {
         };
       };
 
-      opengl = {
-        extraPackages = with pkgs; [vaapiVdpau];
+      graphics = {
+        extraPackages = with pkgs; [nvidia-vaapi-driver];
+        extraPackages32 = with pkgs.pkgsi686Linux; [nvidia-vaapi-driver];
       };
     };
   };
