@@ -1,4 +1,4 @@
-{self, ...}: {
+_: {
   config = {
     boot.kernelParams = [
       "i8042.nomux" # Don't check presence of an active multiplexing controller
@@ -7,7 +7,6 @@
 
     system = {
       stateVersion = "24.11";
-      configurationRevision = self.rev or "dirty";
     };
   };
 }
