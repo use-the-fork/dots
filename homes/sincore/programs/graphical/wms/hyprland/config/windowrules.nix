@@ -7,9 +7,6 @@
 
         "float,class:udiskie"
 
-        # NordPass
-        "float,class:NordPass"
-
         "idleinhibit focus,class:kitty"
 
         # firefox
@@ -45,6 +42,7 @@
         "center,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
         "nofocus,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
         "noborder,class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
+        "size 640 400, class:^(jetbrains-.*)$,title:^(splash)$,floating:1"
 
         #! Center popups/find windows
         "center,class:^(jetbrains-.*)$,title:^( )$,floating:1"
